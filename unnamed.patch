@@ -1,0 +1,4553 @@
+Index: .gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .gitignore	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ .gitignore	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,43 @@
++# Miscellaneous
++*.class
++*.log
++*.pyc
++*.swp
++.DS_Store
++.atom/
++.buildlog/
++.history
++.svn/
++
++# IntelliJ related
++*.iml
++*.ipr
++*.iws
++.idea/
++
++# The .vscode folder contains launch configuration and tasks you configure in
++# VS Code which you may wish to be included in version control, so this line
++# is commented out by default.
++#.vscode/
++
++# Flutter/Dart/Pub related
++**/doc/api/
++.dart_tool/
++.flutter-plugins
++.flutter-plugins-dependencies
++.packages
++.pub-cache/
++.pub/
++/build/
++
++# Web related
++lib/generated_plugin_registrant.dart
++
++# Symbolication related
++app.*.symbols
++
++# Obfuscation related
++app.*.map.json
++
++# Exceptions to above rules.
++!/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
+Index: .metadata
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- .metadata	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ .metadata	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,10 @@
++# This file tracks properties of this Flutter project.
++# Used by Flutter tool to assess capabilities and perform upgrades etc.
++#
++# This file should be version controlled and should not be manually edited.
++
++version:
++  revision: 1ad9baa8b99a2897c20f9e6e54d3b9b359ade314
++  channel: stable
++
++project_type: app
+Index: README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- README.md	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ README.md	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,16 @@
++# sahab_app
++
++A new Flutter application.
++
++## Getting Started
++
++This project is a starting point for a Flutter application.
++
++A few resources to get you started if this is your first Flutter project:
++
++- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
++- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
++
++For help getting started with Flutter, view our
++[online documentation](https://flutter.dev/docs), which offers tutorials,
++samples, guidance on mobile development, and a full API reference.
+Index: android/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/.gitignore	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/.gitignore	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,7 @@
++gradle-wrapper.jar
++/.gradle
++/captures/
++/gradlew
++/gradlew.bat
++/local.properties
++GeneratedPluginRegistrant.java
+Index: android/app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/app/build.gradle	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/app/build.gradle	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,63 @@
++def localProperties = new Properties()
++def localPropertiesFile = rootProject.file('local.properties')
++if (localPropertiesFile.exists()) {
++    localPropertiesFile.withReader('UTF-8') { reader ->
++        localProperties.load(reader)
++    }
++}
++
++def flutterRoot = localProperties.getProperty('flutter.sdk')
++if (flutterRoot == null) {
++    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
++}
++
++def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
++if (flutterVersionCode == null) {
++    flutterVersionCode = '1'
++}
++
++def flutterVersionName = localProperties.getProperty('flutter.versionName')
++if (flutterVersionName == null) {
++    flutterVersionName = '1.0'
++}
++
++apply plugin: 'com.android.application'
++apply plugin: 'kotlin-android'
++apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
++
++android {
++    compileSdkVersion 30
++
++    sourceSets {
++        main.java.srcDirs += 'src/main/kotlin'
++    }
++
++    lintOptions {
++        disable 'InvalidPackage'
++    }
++
++    defaultConfig {
++        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
++        applicationId "com.gfp.sahab_app"
++        minSdkVersion 21
++        targetSdkVersion 30
++        versionCode flutterVersionCode.toInteger()
++        versionName flutterVersionName
++    }
++
++    buildTypes {
++        release {
++            // TODO: Add your own signing config for the release build.
++            // Signing with the debug keys for now, so `flutter run --release` works.
++            signingConfig signingConfigs.debug
++        }
++    }
++}
++
++flutter {
++    source '../..'
++}
++
++dependencies {
++    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
++}
+Index: android/app/src/debug/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/app/src/debug/AndroidManifest.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/app/src/debug/AndroidManifest.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,7 @@
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.gfp.sahab_app">
++    <!-- Flutter needs it to communicate with the running application
++         to allow setting breakpoints, to provide hot reload, etc.
++    -->
++    <uses-permission android:name="android.permission.INTERNET"/>
++</manifest>
+Index: android/app/src/main/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/app/src/main/AndroidManifest.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/app/src/main/AndroidManifest.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,47 @@
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.gfp.sahab_app">
++    <!-- io.flutter.app.FlutterApplication is an android.app.Application that
++         calls FlutterMain.startInitialization(this); in its onCreate method.
++         In most cases you can leave this as-is, but you if you want to provide
++         additional functionality it is fine to subclass or reimplement
++         FlutterApplication and put your custom class here. -->
++    <application
++        android:name="io.flutter.app.FlutterApplication"
++        android:label="sahab_app"
++        android:icon="@mipmap/ic_launcher">
++        <activity
++            android:name=".MainActivity"
++            android:launchMode="singleTop"
++            android:theme="@style/LaunchTheme"
++            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|smallestScreenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
++            android:hardwareAccelerated="true"
++            android:windowSoftInputMode="adjustResize">
++            <!-- Specifies an Android theme to apply to this Activity as soon as
++                 the Android process has started. This theme is visible to the user
++                 while the Flutter UI initializes. After that, this theme continues
++                 to determine the Window background behind the Flutter UI. -->
++            <meta-data
++              android:name="io.flutter.embedding.android.NormalTheme"
++              android:resource="@style/NormalTheme"
++              />
++            <!-- Displays an Android View that continues showing the launch screen
++                 Drawable until Flutter paints its first frame, then this splash
++                 screen fades out. A splash screen is useful to avoid any visual
++                 gap between the end of Android's launch screen and the painting of
++                 Flutter's first frame. -->
++            <meta-data
++              android:name="io.flutter.embedding.android.SplashScreenDrawable"
++              android:resource="@drawable/launch_background"
++              />
++            <intent-filter>
++                <action android:name="android.intent.action.MAIN"/>
++                <category android:name="android.intent.category.LAUNCHER"/>
++            </intent-filter>
++        </activity>
++        <!-- Don't delete the meta-data below.
++             This is used by the Flutter tool to generate GeneratedPluginRegistrant.java -->
++        <meta-data
++            android:name="flutterEmbedding"
++            android:value="2" />
++    </application>
++</manifest>
+Index: android/app/src/main/kotlin/com/gfp/sahab_app/MainActivity.kt
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/app/src/main/kotlin/com/gfp/sahab_app/MainActivity.kt	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/app/src/main/kotlin/com/gfp/sahab_app/MainActivity.kt	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,6 @@
++package com.gfp.sahab_app
++
++import io.flutter.embedding.android.FlutterActivity
++
++class MainActivity: FlutterActivity() {
++}
+Index: android/app/src/main/res/drawable/launch_background.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/app/src/main/res/drawable/launch_background.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/app/src/main/res/drawable/launch_background.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,12 @@
++<?xml version="1.0" encoding="utf-8"?>
++<!-- Modify this file to customize your launch splash screen -->
++<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
++    <item android:drawable="@android:color/white" />
++
++    <!-- You can insert your own image assets here -->
++    <!-- <item>
++        <bitmap
++            android:gravity="center"
++            android:src="@mipmap/launch_image" />
++    </item> -->
++</layer-list>
+Index: android/app/src/main/res/values/styles.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/app/src/main/res/values/styles.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/app/src/main/res/values/styles.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,18 @@
++<?xml version="1.0" encoding="utf-8"?>
++<resources>
++    <!-- Theme applied to the Android Window while the process is starting -->
++    <style name="LaunchTheme" parent="@android:style/Theme.Black.NoTitleBar">
++        <!-- Show a splash screen on the activity. Automatically removed when
++             Flutter draws its first frame -->
++        <item name="android:windowBackground">@drawable/launch_background</item>
++    </style>
++    <!-- Theme applied to the Android Window as soon as the process has started.
++         This theme determines the color of the Android Window while your
++         Flutter UI initializes, as well as behind your Flutter UI while its
++         running.
++         
++         This Theme is only used starting with V2 of Flutter's Android embedding. -->
++    <style name="NormalTheme" parent="@android:style/Theme.Black.NoTitleBar">
++        <item name="android:windowBackground">@android:color/white</item>
++    </style>
++</resources>
+Index: android/app/src/profile/AndroidManifest.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/app/src/profile/AndroidManifest.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/app/src/profile/AndroidManifest.xml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,7 @@
++<manifest xmlns:android="http://schemas.android.com/apk/res/android"
++    package="com.gfp.sahab_app">
++    <!-- Flutter needs it to communicate with the running application
++         to allow setting breakpoints, to provide hot reload, etc.
++    -->
++    <uses-permission android:name="android.permission.INTERNET"/>
++</manifest>
+Index: android/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/build.gradle	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/build.gradle	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,31 @@
++buildscript {
++    ext.kotlin_version = '1.3.50'
++    repositories {
++        google()
++        jcenter()
++    }
++
++    dependencies {
++        classpath 'com.android.tools.build:gradle:3.5.0'
++        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
++    }
++}
++
++allprojects {
++    repositories {
++        google()
++        jcenter()
++    }
++}
++
++rootProject.buildDir = '../build'
++subprojects {
++    project.buildDir = "${rootProject.buildDir}/${project.name}"
++}
++subprojects {
++    project.evaluationDependsOn(':app')
++}
++
++task clean(type: Delete) {
++    delete rootProject.buildDir
++}
+Index: android/gradle.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1256
+===================================================================
+--- android/gradle.properties	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/gradle.properties	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,4 @@
++org.gradle.jvmargs=-Xmx1536M
++android.enableR8=true
++android.useAndroidX=true
++android.enableJetifier=true
+Index: android/gradle/wrapper/gradle-wrapper.properties
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>windows-1256
+===================================================================
+--- android/gradle/wrapper/gradle-wrapper.properties	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/gradle/wrapper/gradle-wrapper.properties	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,6 @@
++#Fri Jun 23 08:50:38 CEST 2017
++distributionBase=GRADLE_USER_HOME
++distributionPath=wrapper/dists
++zipStoreBase=GRADLE_USER_HOME
++zipStorePath=wrapper/dists
++distributionUrl=https\://services.gradle.org/distributions/gradle-5.6.2-all.zip
+Index: android/settings.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- android/settings.gradle	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ android/settings.gradle	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,15 @@
++// Copyright 2014 The Flutter Authors. All rights reserved.
++// Use of this source code is governed by a BSD-style license that can be
++// found in the LICENSE file.
++
++include ':app'
++
++def localPropertiesFile = new File(rootProject.projectDir, "local.properties")
++def properties = new Properties()
++
++assert localPropertiesFile.exists()
++localPropertiesFile.withReader("UTF-8") { reader -> properties.load(reader) }
++
++def flutterSdkPath = properties.getProperty("flutter.sdk")
++assert flutterSdkPath != null, "flutter.sdk not set in local.properties"
++apply from: "$flutterSdkPath/packages/flutter_tools/gradle/app_plugin_loader.gradle"
+Index: ios/.gitignore
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/.gitignore	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/.gitignore	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,32 @@
++*.mode1v3
++*.mode2v3
++*.moved-aside
++*.pbxuser
++*.perspectivev3
++**/*sync/
++.sconsign.dblite
++.tags*
++**/.vagrant/
++**/DerivedData/
++Icon?
++**/Pods/
++**/.symlinks/
++profile
++xcuserdata
++**/.generated/
++Flutter/App.framework
++Flutter/Flutter.framework
++Flutter/Flutter.podspec
++Flutter/Generated.xcconfig
++Flutter/app.flx
++Flutter/app.zip
++Flutter/flutter_assets/
++Flutter/flutter_export_environment.sh
++ServiceDefinitions.json
++Runner/GeneratedPluginRegistrant.*
++
++# Exceptions to above rules.
++!default.mode1v3
++!default.mode2v3
++!default.pbxuser
++!default.perspectivev3
+Index: ios/Flutter/AppFrameworkInfo.plist
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Flutter/AppFrameworkInfo.plist	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Flutter/AppFrameworkInfo.plist	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,26 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++  <key>CFBundleDevelopmentRegion</key>
++  <string>$(DEVELOPMENT_LANGUAGE)</string>
++  <key>CFBundleExecutable</key>
++  <string>App</string>
++  <key>CFBundleIdentifier</key>
++  <string>io.flutter.flutter.app</string>
++  <key>CFBundleInfoDictionaryVersion</key>
++  <string>6.0</string>
++  <key>CFBundleName</key>
++  <string>App</string>
++  <key>CFBundlePackageType</key>
++  <string>FMWK</string>
++  <key>CFBundleShortVersionString</key>
++  <string>1.0</string>
++  <key>CFBundleSignature</key>
++  <string>????</string>
++  <key>CFBundleVersion</key>
++  <string>1.0</string>
++  <key>MinimumOSVersion</key>
++  <string>8.0</string>
++</dict>
++</plist>
+Index: ios/Flutter/Debug.xcconfig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Flutter/Debug.xcconfig	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Flutter/Debug.xcconfig	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,1 @@
++#include "Generated.xcconfig"
+Index: ios/Flutter/Release.xcconfig
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Flutter/Release.xcconfig	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Flutter/Release.xcconfig	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,1 @@
++#include "Generated.xcconfig"
+Index: ios/Runner.xcodeproj/project.pbxproj
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner.xcodeproj/project.pbxproj	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner.xcodeproj/project.pbxproj	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,506 @@
++// !$*UTF8*$!
++{
++	archiveVersion = 1;
++	classes = {
++	};
++	objectVersion = 46;
++	objects = {
++
++/* Begin PBXBuildFile section */
++		1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */ = {isa = PBXBuildFile; fileRef = 1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */; };
++		3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */; };
++		74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74858FAE1ED2DC5600515810 /* AppDelegate.swift */; };
++		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
++		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
++		97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */; };
++/* End PBXBuildFile section */
++
++/* Begin PBXCopyFilesBuildPhase section */
++		9705A1C41CF9048500538489 /* Embed Frameworks */ = {
++			isa = PBXCopyFilesBuildPhase;
++			buildActionMask = 2147483647;
++			dstPath = "";
++			dstSubfolderSpec = 10;
++			files = (
++			);
++			name = "Embed Frameworks";
++			runOnlyForDeploymentPostprocessing = 0;
++		};
++/* End PBXCopyFilesBuildPhase section */
++
++/* Begin PBXFileReference section */
++		1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GeneratedPluginRegistrant.h; sourceTree = "<group>"; };
++		1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GeneratedPluginRegistrant.m; sourceTree = "<group>"; };
++		3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = AppFrameworkInfo.plist; path = Flutter/AppFrameworkInfo.plist; sourceTree = "<group>"; };
++		74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Runner-Bridging-Header.h"; sourceTree = "<group>"; };
++		74858FAE1ED2DC5600515810 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
++		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
++		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Debug.xcconfig; path = Flutter/Debug.xcconfig; sourceTree = "<group>"; };
++		9740EEB31CF90195004384FC /* Generated.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = Generated.xcconfig; path = Flutter/Generated.xcconfig; sourceTree = "<group>"; };
++		97C146EE1CF9000F007C117D /* Runner.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Runner.app; sourceTree = BUILT_PRODUCTS_DIR; };
++		97C146FB1CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
++		97C146FD1CF9000F007C117D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
++		97C147001CF9000F007C117D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
++		97C147021CF9000F007C117D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
++/* End PBXFileReference section */
++
++/* Begin PBXFrameworksBuildPhase section */
++		97C146EB1CF9000F007C117D /* Frameworks */ = {
++			isa = PBXFrameworksBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++		};
++/* End PBXFrameworksBuildPhase section */
++
++/* Begin PBXGroup section */
++		9740EEB11CF90186004384FC /* Flutter */ = {
++			isa = PBXGroup;
++			children = (
++				3B3967151E833CAA004F5970 /* AppFrameworkInfo.plist */,
++				9740EEB21CF90195004384FC /* Debug.xcconfig */,
++				7AFA3C8E1D35360C0083082E /* Release.xcconfig */,
++				9740EEB31CF90195004384FC /* Generated.xcconfig */,
++			);
++			name = Flutter;
++			sourceTree = "<group>";
++		};
++		97C146E51CF9000F007C117D = {
++			isa = PBXGroup;
++			children = (
++				9740EEB11CF90186004384FC /* Flutter */,
++				97C146F01CF9000F007C117D /* Runner */,
++				97C146EF1CF9000F007C117D /* Products */,
++			);
++			sourceTree = "<group>";
++		};
++		97C146EF1CF9000F007C117D /* Products */ = {
++			isa = PBXGroup;
++			children = (
++				97C146EE1CF9000F007C117D /* Runner.app */,
++			);
++			name = Products;
++			sourceTree = "<group>";
++		};
++		97C146F01CF9000F007C117D /* Runner */ = {
++			isa = PBXGroup;
++			children = (
++				97C146FA1CF9000F007C117D /* Main.storyboard */,
++				97C146FD1CF9000F007C117D /* Assets.xcassets */,
++				97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */,
++				97C147021CF9000F007C117D /* Info.plist */,
++				97C146F11CF9000F007C117D /* Supporting Files */,
++				1498D2321E8E86230040F4C2 /* GeneratedPluginRegistrant.h */,
++				1498D2331E8E89220040F4C2 /* GeneratedPluginRegistrant.m */,
++				74858FAE1ED2DC5600515810 /* AppDelegate.swift */,
++				74858FAD1ED2DC5600515810 /* Runner-Bridging-Header.h */,
++			);
++			path = Runner;
++			sourceTree = "<group>";
++		};
++		97C146F11CF9000F007C117D /* Supporting Files */ = {
++			isa = PBXGroup;
++			children = (
++			);
++			name = "Supporting Files";
++			sourceTree = "<group>";
++		};
++/* End PBXGroup section */
++
++/* Begin PBXNativeTarget section */
++		97C146ED1CF9000F007C117D /* Runner */ = {
++			isa = PBXNativeTarget;
++			buildConfigurationList = 97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */;
++			buildPhases = (
++				9740EEB61CF901F6004384FC /* Run Script */,
++				97C146EA1CF9000F007C117D /* Sources */,
++				97C146EB1CF9000F007C117D /* Frameworks */,
++				97C146EC1CF9000F007C117D /* Resources */,
++				9705A1C41CF9048500538489 /* Embed Frameworks */,
++				3B06AD1E1E4923F5004D2608 /* Thin Binary */,
++			);
++			buildRules = (
++			);
++			dependencies = (
++			);
++			name = Runner;
++			productName = Runner;
++			productReference = 97C146EE1CF9000F007C117D /* Runner.app */;
++			productType = "com.apple.product-type.application";
++		};
++/* End PBXNativeTarget section */
++
++/* Begin PBXProject section */
++		97C146E61CF9000F007C117D /* Project object */ = {
++			isa = PBXProject;
++			attributes = {
++				LastUpgradeCheck = 1020;
++				ORGANIZATIONNAME = "";
++				TargetAttributes = {
++					97C146ED1CF9000F007C117D = {
++						CreatedOnToolsVersion = 7.3.1;
++						LastSwiftMigration = 1100;
++					};
++				};
++			};
++			buildConfigurationList = 97C146E91CF9000F007C117D /* Build configuration list for PBXProject "Runner" */;
++			compatibilityVersion = "Xcode 9.3";
++			developmentRegion = en;
++			hasScannedForEncodings = 0;
++			knownRegions = (
++				en,
++				Base,
++			);
++			mainGroup = 97C146E51CF9000F007C117D;
++			productRefGroup = 97C146EF1CF9000F007C117D /* Products */;
++			projectDirPath = "";
++			projectRoot = "";
++			targets = (
++				97C146ED1CF9000F007C117D /* Runner */,
++			);
++		};
++/* End PBXProject section */
++
++/* Begin PBXResourcesBuildPhase section */
++		97C146EC1CF9000F007C117D /* Resources */ = {
++			isa = PBXResourcesBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++				97C147011CF9000F007C117D /* LaunchScreen.storyboard in Resources */,
++				3B3967161E833CAA004F5970 /* AppFrameworkInfo.plist in Resources */,
++				97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */,
++				97C146FC1CF9000F007C117D /* Main.storyboard in Resources */,
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++		};
++/* End PBXResourcesBuildPhase section */
++
++/* Begin PBXShellScriptBuildPhase section */
++		3B06AD1E1E4923F5004D2608 /* Thin Binary */ = {
++			isa = PBXShellScriptBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++			);
++			inputPaths = (
++			);
++			name = "Thin Binary";
++			outputPaths = (
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++			shellPath = /bin/sh;
++			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" embed_and_thin";
++		};
++		9740EEB61CF901F6004384FC /* Run Script */ = {
++			isa = PBXShellScriptBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++			);
++			inputPaths = (
++			);
++			name = "Run Script";
++			outputPaths = (
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++			shellPath = /bin/sh;
++			shellScript = "/bin/sh \"$FLUTTER_ROOT/packages/flutter_tools/bin/xcode_backend.sh\" build";
++		};
++/* End PBXShellScriptBuildPhase section */
++
++/* Begin PBXSourcesBuildPhase section */
++		97C146EA1CF9000F007C117D /* Sources */ = {
++			isa = PBXSourcesBuildPhase;
++			buildActionMask = 2147483647;
++			files = (
++				74858FAF1ED2DC5600515810 /* AppDelegate.swift in Sources */,
++				1498D2341E8E89220040F4C2 /* GeneratedPluginRegistrant.m in Sources */,
++			);
++			runOnlyForDeploymentPostprocessing = 0;
++		};
++/* End PBXSourcesBuildPhase section */
++
++/* Begin PBXVariantGroup section */
++		97C146FA1CF9000F007C117D /* Main.storyboard */ = {
++			isa = PBXVariantGroup;
++			children = (
++				97C146FB1CF9000F007C117D /* Base */,
++			);
++			name = Main.storyboard;
++			sourceTree = "<group>";
++		};
++		97C146FF1CF9000F007C117D /* LaunchScreen.storyboard */ = {
++			isa = PBXVariantGroup;
++			children = (
++				97C147001CF9000F007C117D /* Base */,
++			);
++			name = LaunchScreen.storyboard;
++			sourceTree = "<group>";
++		};
++/* End PBXVariantGroup section */
++
++/* Begin XCBuildConfiguration section */
++		249021D3217E4FDB00AE95B9 /* Profile */ = {
++			isa = XCBuildConfiguration;
++			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
++			buildSettings = {
++				ALWAYS_SEARCH_USER_PATHS = NO;
++				CLANG_ANALYZER_NONNULL = YES;
++				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
++				CLANG_CXX_LIBRARY = "libc++";
++				CLANG_ENABLE_MODULES = YES;
++				CLANG_ENABLE_OBJC_ARC = YES;
++				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
++				CLANG_WARN_BOOL_CONVERSION = YES;
++				CLANG_WARN_COMMA = YES;
++				CLANG_WARN_CONSTANT_CONVERSION = YES;
++				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
++				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
++				CLANG_WARN_EMPTY_BODY = YES;
++				CLANG_WARN_ENUM_CONVERSION = YES;
++				CLANG_WARN_INFINITE_RECURSION = YES;
++				CLANG_WARN_INT_CONVERSION = YES;
++				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
++				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
++				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
++				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
++				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
++				CLANG_WARN_STRICT_PROTOTYPES = YES;
++				CLANG_WARN_SUSPICIOUS_MOVE = YES;
++				CLANG_WARN_UNREACHABLE_CODE = YES;
++				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
++				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
++				COPY_PHASE_STRIP = NO;
++				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
++				ENABLE_NS_ASSERTIONS = NO;
++				ENABLE_STRICT_OBJC_MSGSEND = YES;
++				GCC_C_LANGUAGE_STANDARD = gnu99;
++				GCC_NO_COMMON_BLOCKS = YES;
++				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
++				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
++				GCC_WARN_UNDECLARED_SELECTOR = YES;
++				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
++				GCC_WARN_UNUSED_FUNCTION = YES;
++				GCC_WARN_UNUSED_VARIABLE = YES;
++				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
++				MTL_ENABLE_DEBUG_INFO = NO;
++				SDKROOT = iphoneos;
++				SUPPORTED_PLATFORMS = iphoneos;
++				TARGETED_DEVICE_FAMILY = "1,2";
++				VALIDATE_PRODUCT = YES;
++			};
++			name = Profile;
++		};
++		249021D4217E4FDB00AE95B9 /* Profile */ = {
++			isa = XCBuildConfiguration;
++			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
++			buildSettings = {
++				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
++				CLANG_ENABLE_MODULES = YES;
++				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
++				ENABLE_BITCODE = NO;
++				FRAMEWORK_SEARCH_PATHS = (
++					"$(inherited)",
++					"$(PROJECT_DIR)/Flutter",
++				);
++				INFOPLIST_FILE = Runner/Info.plist;
++				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
++				LIBRARY_SEARCH_PATHS = (
++					"$(inherited)",
++					"$(PROJECT_DIR)/Flutter",
++				);
++				PRODUCT_BUNDLE_IDENTIFIER = com.gfp.sahabApp;
++				PRODUCT_NAME = "$(TARGET_NAME)";
++				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
++				SWIFT_VERSION = 5.0;
++				VERSIONING_SYSTEM = "apple-generic";
++			};
++			name = Profile;
++		};
++		97C147031CF9000F007C117D /* Debug */ = {
++			isa = XCBuildConfiguration;
++			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
++			buildSettings = {
++				ALWAYS_SEARCH_USER_PATHS = NO;
++				CLANG_ANALYZER_NONNULL = YES;
++				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
++				CLANG_CXX_LIBRARY = "libc++";
++				CLANG_ENABLE_MODULES = YES;
++				CLANG_ENABLE_OBJC_ARC = YES;
++				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
++				CLANG_WARN_BOOL_CONVERSION = YES;
++				CLANG_WARN_COMMA = YES;
++				CLANG_WARN_CONSTANT_CONVERSION = YES;
++				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
++				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
++				CLANG_WARN_EMPTY_BODY = YES;
++				CLANG_WARN_ENUM_CONVERSION = YES;
++				CLANG_WARN_INFINITE_RECURSION = YES;
++				CLANG_WARN_INT_CONVERSION = YES;
++				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
++				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
++				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
++				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
++				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
++				CLANG_WARN_STRICT_PROTOTYPES = YES;
++				CLANG_WARN_SUSPICIOUS_MOVE = YES;
++				CLANG_WARN_UNREACHABLE_CODE = YES;
++				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
++				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
++				COPY_PHASE_STRIP = NO;
++				DEBUG_INFORMATION_FORMAT = dwarf;
++				ENABLE_STRICT_OBJC_MSGSEND = YES;
++				ENABLE_TESTABILITY = YES;
++				GCC_C_LANGUAGE_STANDARD = gnu99;
++				GCC_DYNAMIC_NO_PIC = NO;
++				GCC_NO_COMMON_BLOCKS = YES;
++				GCC_OPTIMIZATION_LEVEL = 0;
++				GCC_PREPROCESSOR_DEFINITIONS = (
++					"DEBUG=1",
++					"$(inherited)",
++				);
++				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
++				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
++				GCC_WARN_UNDECLARED_SELECTOR = YES;
++				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
++				GCC_WARN_UNUSED_FUNCTION = YES;
++				GCC_WARN_UNUSED_VARIABLE = YES;
++				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
++				MTL_ENABLE_DEBUG_INFO = YES;
++				ONLY_ACTIVE_ARCH = YES;
++				SDKROOT = iphoneos;
++				TARGETED_DEVICE_FAMILY = "1,2";
++			};
++			name = Debug;
++		};
++		97C147041CF9000F007C117D /* Release */ = {
++			isa = XCBuildConfiguration;
++			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
++			buildSettings = {
++				ALWAYS_SEARCH_USER_PATHS = NO;
++				CLANG_ANALYZER_NONNULL = YES;
++				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
++				CLANG_CXX_LIBRARY = "libc++";
++				CLANG_ENABLE_MODULES = YES;
++				CLANG_ENABLE_OBJC_ARC = YES;
++				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
++				CLANG_WARN_BOOL_CONVERSION = YES;
++				CLANG_WARN_COMMA = YES;
++				CLANG_WARN_CONSTANT_CONVERSION = YES;
++				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
++				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
++				CLANG_WARN_EMPTY_BODY = YES;
++				CLANG_WARN_ENUM_CONVERSION = YES;
++				CLANG_WARN_INFINITE_RECURSION = YES;
++				CLANG_WARN_INT_CONVERSION = YES;
++				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
++				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
++				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
++				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
++				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
++				CLANG_WARN_STRICT_PROTOTYPES = YES;
++				CLANG_WARN_SUSPICIOUS_MOVE = YES;
++				CLANG_WARN_UNREACHABLE_CODE = YES;
++				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
++				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
++				COPY_PHASE_STRIP = NO;
++				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
++				ENABLE_NS_ASSERTIONS = NO;
++				ENABLE_STRICT_OBJC_MSGSEND = YES;
++				GCC_C_LANGUAGE_STANDARD = gnu99;
++				GCC_NO_COMMON_BLOCKS = YES;
++				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
++				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
++				GCC_WARN_UNDECLARED_SELECTOR = YES;
++				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
++				GCC_WARN_UNUSED_FUNCTION = YES;
++				GCC_WARN_UNUSED_VARIABLE = YES;
++				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
++				MTL_ENABLE_DEBUG_INFO = NO;
++				SDKROOT = iphoneos;
++				SUPPORTED_PLATFORMS = iphoneos;
++				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
++				TARGETED_DEVICE_FAMILY = "1,2";
++				VALIDATE_PRODUCT = YES;
++			};
++			name = Release;
++		};
++		97C147061CF9000F007C117D /* Debug */ = {
++			isa = XCBuildConfiguration;
++			baseConfigurationReference = 9740EEB21CF90195004384FC /* Debug.xcconfig */;
++			buildSettings = {
++				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
++				CLANG_ENABLE_MODULES = YES;
++				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
++				ENABLE_BITCODE = NO;
++				FRAMEWORK_SEARCH_PATHS = (
++					"$(inherited)",
++					"$(PROJECT_DIR)/Flutter",
++				);
++				INFOPLIST_FILE = Runner/Info.plist;
++				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
++				LIBRARY_SEARCH_PATHS = (
++					"$(inherited)",
++					"$(PROJECT_DIR)/Flutter",
++				);
++				PRODUCT_BUNDLE_IDENTIFIER = com.gfp.sahabApp;
++				PRODUCT_NAME = "$(TARGET_NAME)";
++				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
++				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
++				SWIFT_VERSION = 5.0;
++				VERSIONING_SYSTEM = "apple-generic";
++			};
++			name = Debug;
++		};
++		97C147071CF9000F007C117D /* Release */ = {
++			isa = XCBuildConfiguration;
++			baseConfigurationReference = 7AFA3C8E1D35360C0083082E /* Release.xcconfig */;
++			buildSettings = {
++				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
++				CLANG_ENABLE_MODULES = YES;
++				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
++				ENABLE_BITCODE = NO;
++				FRAMEWORK_SEARCH_PATHS = (
++					"$(inherited)",
++					"$(PROJECT_DIR)/Flutter",
++				);
++				INFOPLIST_FILE = Runner/Info.plist;
++				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
++				LIBRARY_SEARCH_PATHS = (
++					"$(inherited)",
++					"$(PROJECT_DIR)/Flutter",
++				);
++				PRODUCT_BUNDLE_IDENTIFIER = com.gfp.sahabApp;
++				PRODUCT_NAME = "$(TARGET_NAME)";
++				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
++				SWIFT_VERSION = 5.0;
++				VERSIONING_SYSTEM = "apple-generic";
++			};
++			name = Release;
++		};
++/* End XCBuildConfiguration section */
++
++/* Begin XCConfigurationList section */
++		97C146E91CF9000F007C117D /* Build configuration list for PBXProject "Runner" */ = {
++			isa = XCConfigurationList;
++			buildConfigurations = (
++				97C147031CF9000F007C117D /* Debug */,
++				97C147041CF9000F007C117D /* Release */,
++				249021D3217E4FDB00AE95B9 /* Profile */,
++			);
++			defaultConfigurationIsVisible = 0;
++			defaultConfigurationName = Release;
++		};
++		97C147051CF9000F007C117D /* Build configuration list for PBXNativeTarget "Runner" */ = {
++			isa = XCConfigurationList;
++			buildConfigurations = (
++				97C147061CF9000F007C117D /* Debug */,
++				97C147071CF9000F007C117D /* Release */,
++				249021D4217E4FDB00AE95B9 /* Profile */,
++			);
++			defaultConfigurationIsVisible = 0;
++			defaultConfigurationName = Release;
++		};
++/* End XCConfigurationList section */
++	};
++	rootObject = 97C146E61CF9000F007C117D /* Project object */;
++}
+Index: ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner.xcodeproj/project.xcworkspace/contents.xcworkspacedata	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<Workspace
++   version = "1.0">
++   <FileRef
++      location = "group:Runner.xcodeproj">
++   </FileRef>
++</Workspace>
+Index: ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>IDEDidComputeMac32BitWarning</key>
++	<true/>
++</dict>
++</plist>
+Index: ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner.xcodeproj/project.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>PreviewsEnabled</key>
++	<false/>
++</dict>
++</plist>
+Index: ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner.xcodeproj/xcshareddata/xcschemes/Runner.xcscheme	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,91 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<Scheme
++   LastUpgradeVersion = "1020"
++   version = "1.3">
++   <BuildAction
++      parallelizeBuildables = "YES"
++      buildImplicitDependencies = "YES">
++      <BuildActionEntries>
++         <BuildActionEntry
++            buildForTesting = "YES"
++            buildForRunning = "YES"
++            buildForProfiling = "YES"
++            buildForArchiving = "YES"
++            buildForAnalyzing = "YES">
++            <BuildableReference
++               BuildableIdentifier = "primary"
++               BlueprintIdentifier = "97C146ED1CF9000F007C117D"
++               BuildableName = "Runner.app"
++               BlueprintName = "Runner"
++               ReferencedContainer = "container:Runner.xcodeproj">
++            </BuildableReference>
++         </BuildActionEntry>
++      </BuildActionEntries>
++   </BuildAction>
++   <TestAction
++      buildConfiguration = "Debug"
++      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
++      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
++      shouldUseLaunchSchemeArgsEnv = "YES">
++      <Testables>
++      </Testables>
++      <MacroExpansion>
++         <BuildableReference
++            BuildableIdentifier = "primary"
++            BlueprintIdentifier = "97C146ED1CF9000F007C117D"
++            BuildableName = "Runner.app"
++            BlueprintName = "Runner"
++            ReferencedContainer = "container:Runner.xcodeproj">
++         </BuildableReference>
++      </MacroExpansion>
++      <AdditionalOptions>
++      </AdditionalOptions>
++   </TestAction>
++   <LaunchAction
++      buildConfiguration = "Debug"
++      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
++      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
++      launchStyle = "0"
++      useCustomWorkingDirectory = "NO"
++      ignoresPersistentStateOnLaunch = "NO"
++      debugDocumentVersioning = "YES"
++      debugServiceExtension = "internal"
++      allowLocationSimulation = "YES">
++      <BuildableProductRunnable
++         runnableDebuggingMode = "0">
++         <BuildableReference
++            BuildableIdentifier = "primary"
++            BlueprintIdentifier = "97C146ED1CF9000F007C117D"
++            BuildableName = "Runner.app"
++            BlueprintName = "Runner"
++            ReferencedContainer = "container:Runner.xcodeproj">
++         </BuildableReference>
++      </BuildableProductRunnable>
++      <AdditionalOptions>
++      </AdditionalOptions>
++   </LaunchAction>
++   <ProfileAction
++      buildConfiguration = "Profile"
++      shouldUseLaunchSchemeArgsEnv = "YES"
++      savedToolIdentifier = ""
++      useCustomWorkingDirectory = "NO"
++      debugDocumentVersioning = "YES">
++      <BuildableProductRunnable
++         runnableDebuggingMode = "0">
++         <BuildableReference
++            BuildableIdentifier = "primary"
++            BlueprintIdentifier = "97C146ED1CF9000F007C117D"
++            BuildableName = "Runner.app"
++            BlueprintName = "Runner"
++            ReferencedContainer = "container:Runner.xcodeproj">
++         </BuildableReference>
++      </BuildableProductRunnable>
++   </ProfileAction>
++   <AnalyzeAction
++      buildConfiguration = "Debug">
++   </AnalyzeAction>
++   <ArchiveAction
++      buildConfiguration = "Release"
++      revealArchiveInOrganizer = "YES">
++   </ArchiveAction>
++</Scheme>
+Index: ios/Runner.xcworkspace/contents.xcworkspacedata
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner.xcworkspace/contents.xcworkspacedata	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner.xcworkspace/contents.xcworkspacedata	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,7 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<Workspace
++   version = "1.0">
++   <FileRef
++      location = "group:Runner.xcodeproj">
++   </FileRef>
++</Workspace>
+Index: ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>IDEDidComputeMac32BitWarning</key>
++	<true/>
++</dict>
++</plist>
+Index: ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner.xcworkspace/xcshareddata/WorkspaceSettings.xcsettings	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,8 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>PreviewsEnabled</key>
++	<false/>
++</dict>
++</plist>
+Index: ios/Runner/AppDelegate.swift
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner/AppDelegate.swift	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner/AppDelegate.swift	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,13 @@
++import UIKit
++import Flutter
++
++@UIApplicationMain
++@objc class AppDelegate: FlutterAppDelegate {
++  override func application(
++    _ application: UIApplication,
++    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
++  ) -> Bool {
++    GeneratedPluginRegistrant.register(with: self)
++    return super.application(application, didFinishLaunchingWithOptions: launchOptions)
++  }
++}
+Index: ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner/Assets.xcassets/AppIcon.appiconset/Contents.json	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,122 @@
++{
++  "images" : [
++    {
++      "size" : "20x20",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-20x20@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "20x20",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-20x20@3x.png",
++      "scale" : "3x"
++    },
++    {
++      "size" : "29x29",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-29x29@1x.png",
++      "scale" : "1x"
++    },
++    {
++      "size" : "29x29",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-29x29@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "29x29",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-29x29@3x.png",
++      "scale" : "3x"
++    },
++    {
++      "size" : "40x40",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-40x40@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "40x40",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-40x40@3x.png",
++      "scale" : "3x"
++    },
++    {
++      "size" : "60x60",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-60x60@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "60x60",
++      "idiom" : "iphone",
++      "filename" : "Icon-App-60x60@3x.png",
++      "scale" : "3x"
++    },
++    {
++      "size" : "20x20",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-20x20@1x.png",
++      "scale" : "1x"
++    },
++    {
++      "size" : "20x20",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-20x20@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "29x29",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-29x29@1x.png",
++      "scale" : "1x"
++    },
++    {
++      "size" : "29x29",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-29x29@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "40x40",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-40x40@1x.png",
++      "scale" : "1x"
++    },
++    {
++      "size" : "40x40",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-40x40@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "76x76",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-76x76@1x.png",
++      "scale" : "1x"
++    },
++    {
++      "size" : "76x76",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-76x76@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "83.5x83.5",
++      "idiom" : "ipad",
++      "filename" : "Icon-App-83.5x83.5@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "size" : "1024x1024",
++      "idiom" : "ios-marketing",
++      "filename" : "Icon-App-1024x1024@1x.png",
++      "scale" : "1x"
++    }
++  ],
++  "info" : {
++    "version" : 1,
++    "author" : "xcode"
++  }
++}
+Index: ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner/Assets.xcassets/LaunchImage.imageset/Contents.json	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,23 @@
++{
++  "images" : [
++    {
++      "idiom" : "universal",
++      "filename" : "LaunchImage.png",
++      "scale" : "1x"
++    },
++    {
++      "idiom" : "universal",
++      "filename" : "LaunchImage@2x.png",
++      "scale" : "2x"
++    },
++    {
++      "idiom" : "universal",
++      "filename" : "LaunchImage@3x.png",
++      "scale" : "3x"
++    }
++  ],
++  "info" : {
++    "version" : 1,
++    "author" : "xcode"
++  }
++}
+Index: ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner/Assets.xcassets/LaunchImage.imageset/README.md	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,5 @@
++# Launch Screen Assets
++
++You can customize the launch screen with your own desired assets by replacing the image files in this directory.
++
++You can also do it by opening your Flutter project's Xcode project with `open ios/Runner.xcworkspace`, selecting `Runner/Assets.xcassets` in the Project Navigator and dropping in the desired images.
+\ No newline at end of file
+Index: ios/Runner/Base.lproj/LaunchScreen.storyboard
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner/Base.lproj/LaunchScreen.storyboard	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner/Base.lproj/LaunchScreen.storyboard	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,37 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16G29" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" launchScreen="YES" colorMatched="YES" initialViewController="01J-lp-oVM">
++    <dependencies>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
++    </dependencies>
++    <scenes>
++        <!--View Controller-->
++        <scene sceneID="EHf-IW-A2E">
++            <objects>
++                <viewController id="01J-lp-oVM" sceneMemberID="viewController">
++                    <layoutGuides>
++                        <viewControllerLayoutGuide type="top" id="Ydg-fD-yQy"/>
++                        <viewControllerLayoutGuide type="bottom" id="xbc-2k-c8Z"/>
++                    </layoutGuides>
++                    <view key="view" contentMode="scaleToFill" id="Ze5-6b-2t3">
++                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
++                        <subviews>
++                            <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" image="LaunchImage" translatesAutoresizingMaskIntoConstraints="NO" id="YRO-k0-Ey4">
++                            </imageView>
++                        </subviews>
++                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
++                        <constraints>
++                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="1a2-6s-vTC"/>
++                            <constraint firstItem="YRO-k0-Ey4" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="4X2-HB-R7a"/>
++                        </constraints>
++                    </view>
++                </viewController>
++                <placeholder placeholderIdentifier="IBFirstResponder" id="iYj-Kq-Ea1" userLabel="First Responder" sceneMemberID="firstResponder"/>
++            </objects>
++            <point key="canvasLocation" x="53" y="375"/>
++        </scene>
++    </scenes>
++    <resources>
++        <image name="LaunchImage" width="168" height="185"/>
++    </resources>
++</document>
+Index: ios/Runner/Base.lproj/Main.storyboard
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner/Base.lproj/Main.storyboard	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner/Base.lproj/Main.storyboard	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,26 @@
++<?xml version="1.0" encoding="UTF-8" standalone="no"?>
++<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
++    <dependencies>
++        <deployment identifier="iOS"/>
++        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
++    </dependencies>
++    <scenes>
++        <!--Flutter View Controller-->
++        <scene sceneID="tne-QT-ifu">
++            <objects>
++                <viewController id="BYZ-38-t0r" customClass="FlutterViewController" sceneMemberID="viewController">
++                    <layoutGuides>
++                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
++                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
++                    </layoutGuides>
++                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
++                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
++                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
++                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
++                    </view>
++                </viewController>
++                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
++            </objects>
++        </scene>
++    </scenes>
++</document>
+Index: ios/Runner/Info.plist
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner/Info.plist	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner/Info.plist	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,45 @@
++<?xml version="1.0" encoding="UTF-8"?>
++<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
++<plist version="1.0">
++<dict>
++	<key>CFBundleDevelopmentRegion</key>
++	<string>$(DEVELOPMENT_LANGUAGE)</string>
++	<key>CFBundleExecutable</key>
++	<string>$(EXECUTABLE_NAME)</string>
++	<key>CFBundleIdentifier</key>
++	<string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
++	<key>CFBundleInfoDictionaryVersion</key>
++	<string>6.0</string>
++	<key>CFBundleName</key>
++	<string>sahab_app</string>
++	<key>CFBundlePackageType</key>
++	<string>APPL</string>
++	<key>CFBundleShortVersionString</key>
++	<string>$(FLUTTER_BUILD_NAME)</string>
++	<key>CFBundleSignature</key>
++	<string>????</string>
++	<key>CFBundleVersion</key>
++	<string>$(FLUTTER_BUILD_NUMBER)</string>
++	<key>LSRequiresIPhoneOS</key>
++	<true/>
++	<key>UILaunchStoryboardName</key>
++	<string>LaunchScreen</string>
++	<key>UIMainStoryboardFile</key>
++	<string>Main</string>
++	<key>UISupportedInterfaceOrientations</key>
++	<array>
++		<string>UIInterfaceOrientationPortrait</string>
++		<string>UIInterfaceOrientationLandscapeLeft</string>
++		<string>UIInterfaceOrientationLandscapeRight</string>
++	</array>
++	<key>UISupportedInterfaceOrientations~ipad</key>
++	<array>
++		<string>UIInterfaceOrientationPortrait</string>
++		<string>UIInterfaceOrientationPortraitUpsideDown</string>
++		<string>UIInterfaceOrientationLandscapeLeft</string>
++		<string>UIInterfaceOrientationLandscapeRight</string>
++	</array>
++	<key>UIViewControllerBasedStatusBarAppearance</key>
++	<false/>
++</dict>
++</plist>
+Index: ios/Runner/Runner-Bridging-Header.h
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- ios/Runner/Runner-Bridging-Header.h	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ ios/Runner/Runner-Bridging-Header.h	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,1 @@
++#import "GeneratedPluginRegistrant.h"
+Index: lib/drawer_screen/about_screen.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/drawer_screen/about_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/drawer_screen/about_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,49 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class AboutScreen extends StatelessWidget {
++  @override
++  Widget build(BuildContext context) {
++    return Scaffold(
++      body: Padding(
++        padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++        child: SingleChildScrollView(
++          child: Container(
++            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
++            child: Column(
++              mainAxisAlignment: MainAxisAlignment.start,
++              crossAxisAlignment: CrossAxisAlignment.start,
++              children: <Widget>[
++
++                sizedBox22,
++                Container(
++                  width: double.infinity,
++                  child: Text(
++                    "About US",
++                    style: KSignIntoYourAccount,
++                  ),
++                ),
++                sizedBox22,
++                sizedBox8,
++                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
++                  "m has been the industry's standard dumm"
++                  "y text ever since the 1500s, whenLorem Ipsum is simply dummy text of the p"
++                  "rinting and typesetting industry. Lorem Ipsu"
++                  "m has been the industry's standard dumm"
++                  "y text ever since the 1500s, whenLorem Ipsum is simply dummy text of the p"
++                  "rinting and typesetting industry. Lorem Ipsu"
++                  "m has been the industry's standard dumm"
++                  "y text ever since the 1500s, when",style: TextStyle(
++                  fontSize: 18,letterSpacing: 0.9
++                ),),
++
++                SizedBox(
++                  height: 50,
++                )
++              ],
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
+Index: lib/drawer_screen/conact_screen.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/drawer_screen/conact_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/drawer_screen/conact_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,49 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class ContactScreen extends StatelessWidget {
++  @override
++  Widget build(BuildContext context) {
++    return Scaffold(
++      body: Padding(
++        padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++        child: SingleChildScrollView(
++          child: Container(
++            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
++            child: Column(
++              mainAxisAlignment: MainAxisAlignment.start,
++              crossAxisAlignment: CrossAxisAlignment.start,
++              children: <Widget>[
++
++                sizedBox22,
++                Container(
++                  width: double.infinity,
++                  child: Text(
++                    "Contact US",
++                    style: KSignIntoYourAccount,
++                  ),
++                ),
++                sizedBox22,
++                sizedBox8,
++                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
++                    "m has been the industry's standard dumm"
++                    "y text ever since the 1500s, whenLorem Ipsum is simply dummy text of the p"
++                    "rinting and typesetting industry. Lorem Ipsu"
++                    "m has been the industry's standard dumm"
++                    "y text ever since the 1500s, whenLorem Ipsum is simply dummy text of the p"
++                    "rinting and typesetting industry. Lorem Ipsu"
++                    "m has been the industry's standard dumm"
++                    "y text ever since the 1500s, when",style: TextStyle(
++                    fontSize: 18,letterSpacing: 0.9
++                ),),
++
++                SizedBox(
++                  height: 50,
++                )
++              ],
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
+Index: lib/drawer_screen/help_screen.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/drawer_screen/help_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/drawer_screen/help_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,49 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class HelpScreen extends StatelessWidget {
++  @override
++  Widget build(BuildContext context) {
++   return Scaffold(
++      body: Padding(
++        padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++        child: SingleChildScrollView(
++          child: Container(
++            margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
++            child: Column(
++              mainAxisAlignment: MainAxisAlignment.start,
++              crossAxisAlignment: CrossAxisAlignment.start,
++              children: <Widget>[
++
++                sizedBox22,
++                Container(
++                  width: double.infinity,
++                  child: Text(
++                    "Help",
++                    style: KSignIntoYourAccount,
++                  ),
++                ),
++                sizedBox22,
++                sizedBox8,
++                Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsu"
++                    "m has been the industry's standard dumm"
++                    "y text ever since the 1500s, whenLorem Ipsum is simply dummy text of the p"
++                    "rinting and typesetting industry. Lorem Ipsu"
++                    "m has been the industry's standard dumm"
++                    "y text ever since the 1500s, whenLorem Ipsum is simply dummy text of the p"
++                    "rinting and typesetting industry. Lorem Ipsu"
++                    "m has been the industry's standard dumm"
++                    "y text ever since the 1500s, when",style: TextStyle(
++                    fontSize: 18,letterSpacing: 0.9
++                ),),
++
++                SizedBox(
++                  height: 50,
++                )
++              ],
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
+Index: lib/helper/style.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/helper/style.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/helper/style.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,57 @@
++import 'package:flutter/material.dart';
++
++const Color KPrimary = Colors.deepOrange;
++const Color KRed = Colors.red;
++const Color KWhite = Colors.white;
++const Color KBlack = Colors.black;
++const Color KGrey = Colors.grey;
++const Color KGreen = Colors.green;
++const Color KAccent = Colors.blueAccent;
++const Color KBlue = Colors.blue;
++const Color KColorFaceBook = Color(0xff405A94);
++const Color KColoGoogle = Color(0xffDF4A31);
++const Color KColorSign = Color(0xffDF4A31);
++const Color KColorKeep = Color(0xff07303E);
++const Color KColorSignIn = Color(0xff008831);
++const Color KSpanColorSecond = Color(0xff008831);
++const Color KSpanColorFirst = Color(0xff504F4F);
++
++const SizedBox sizedBox = SizedBox(
++  height: 10,
++);
++const SizedBox sizedBox22 = SizedBox(
++  height: 22,
++);
++const SizedBox sizedBox8 = SizedBox(
++  height: 8,
++);
++const SizedBox sizedBox20 = SizedBox(
++  height: 20,
++);
++
++
++const TextStyle KSignIntoYourAccount = TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Color(0xff07303e));
++const TextStyle KContinueWith = TextStyle(fontSize: 18, color: KWhite);
++const TextStyle KSign = TextStyle(color:KColorSign ,fontSize: 16);
++const TextStyle KKeepMe = TextStyle(color: KColorKeep,fontSize: 16);
++const TextStyle KTitleCard = TextStyle(color: KColorKeep,fontSize: 18);
++const TextStyle KPleaseEnter = TextStyle(color: KColorKeep,fontSize: 18);
++const TextStyle KSpanTextSecond =  TextStyle(
++    color: KSpanColorSecond,
++    fontSize: 16
++);
++const TextStyle KSpanTextFirst = TextStyle(
++    color: KSpanColorFirst,
++    fontSize: 16
++);
++
++const TextStyle KHintStyle = TextStyle(
++    color: KGrey,
++    fontFamily: "Sen",
++    fontSize: 18);
++
++const BoxShadow KBoxShadow =BoxShadow(
++    color: Colors.black,
++    blurRadius: 2,
++    offset: Offset(0, 2));
++
+Index: lib/main.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/main.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/main.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,27 @@
++import 'package:flutter/material.dart';
++
++import 'package:sahab_app/screen/sign_in.dart';
++import 'package:sahab_app/screen/sign_up.dart';
++import 'package:sahab_app/screen/verify_your_number.dart';
++
++import 'main_screen.dart';
++
++void main() {
++  runApp(MyApp());
++}
++
++class MyApp extends StatelessWidget {
++  @override
++  Widget build(BuildContext context) {
++    return MaterialApp(
++      title: 'Flutter Demo',
++      debugShowCheckedModeBanner: false,
++      theme: ThemeData(
++
++        primaryColor: Colors.white,
++      ),
++      home:SignIn(),
++    );
++  }
++}
++
+Index: lib/main_drawer.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/main_drawer.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/main_drawer.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,69 @@
++import 'package:flutter/material.dart';
++import 'package:community_material_icon/community_material_icon.dart';
++
++import 'drawer_screen/about_screen.dart';
++import 'drawer_screen/conact_screen.dart';
++import 'drawer_screen/help_screen.dart';
++
++class MainDrawer extends StatelessWidget {
++  @override
++  Widget build(BuildContext context) {
++    return Drawer(
++        child: Column(
++          mainAxisAlignment: MainAxisAlignment.start,
++          crossAxisAlignment: CrossAxisAlignment.start,
++          children: <Widget>[
++            Padding(
++              padding: const EdgeInsets.only(top: 24,right: 8),
++              child: Image.asset(
++                'images/logo.png',
++                width: 180,
++                height: 80,
++              ),
++
++            ),
++            SizedBox(height: 8,),
++            Divider(color: Colors.black12,height: 2,),
++            ListTile(
++              leading: Icon(Icons.help_outline,size: 32,color: Color(0xff07303E),),
++              title: Text("Helps",style: TextStyle(fontSize: 18,color:Color (0xff07303E)),),
++              onTap: (){
++                Navigator.of(context).pushReplacement(MaterialPageRoute(
++                    builder: (BuildContext context) => HelpScreen()));
++
++              },
++            ),
++            ListTile(
++              leading: Icon(Icons.phone_in_talk,size: 32,color: Color(0xff07303E),),
++              title: Text("Contact Us",style: TextStyle(fontSize: 18,color:Color (0xff07303E)),),
++              onTap: (){
++                Navigator.of(context).pushReplacement(MaterialPageRoute(
++                    builder: (BuildContext context) => ContactScreen()));
++              },
++            ),
++            ListTile(
++              leading: Icon(Icons.info_outline,size: 32,color: Color(0xff07303E),),
++              title: Text("About Us",style: TextStyle(fontSize: 18,color:Color (0xff07303E)),),
++              onTap: (){
++                Navigator.of(context).pushReplacement(MaterialPageRoute(
++                    builder: (BuildContext context) => AboutScreen()));
++              },
++            ),
++            SizedBox(height: 8,),
++            Divider(color: Colors.black12,height: 2,),
++            ListTile(
++              leading: Icon(Icons.language,size: 32,color: Color(0xff07303E),),
++              title: Text("Language (AR)",style: TextStyle(fontSize: 18,color:Color (0xff07303E)),),
++
++            ),
++
++            ListTile(
++              leading: Icon(CommunityMaterialIcons.logout,size: 32,color: Color(0xff07303E),),
++              title: Text("Sign Out",style: TextStyle(fontSize: 18,color:Color (0xff07303E)),),
++            ),
++
++          ],
++        )
++    );
++  }
++}
+Index: lib/main_screen.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/main_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/main_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,107 @@
++import 'package:circular_bottom_navigation/tab_item.dart';
++import 'package:flutter/cupertino.dart';
++import 'package:flutter/material.dart';
++import 'package:circular_bottom_navigation/circular_bottom_navigation.dart';
++
++import 'package:sahab_app/main_drawer.dart';
++import 'package:sahab_app/screen2/camera_page.dart';
++import 'package:sahab_app/screen2/home_page.dart';
++import 'package:sahab_app/screen2/profile_screen.dart';
++
++class MainScreen extends StatefulWidget {
++  MainScreen({Key key, this.title}) : super(key: key);
++  final String title;
++
++  @override
++  _MainScreenState createState() => _MainScreenState();
++}
++
++class _MainScreenState extends State<MainScreen> {
++  var scaffoldKey=GlobalKey<ScaffoldState>();
++  int currentTabIndex = 0;
++  List<Widget> page;
++  Widget currentPage;
++  HomePage homePage;
++  CameraPage cameraPage;
++  ProfileScreen profileScreen;
++    int selectedPos = 0;
++  double bottomNavBarHeight = 80;
++  List<TabItem> tabItems = List.of([
++
++    new TabItem(Icons.home, "Home", Colors.white, labelStyle: TextStyle(color: Color(0xff626B70), fontWeight: FontWeight.bold)),
++    new TabItem(Icons.camera_alt, "New", Colors.white, labelStyle: TextStyle(color: Color(0xff626B70), fontWeight: FontWeight.bold)),
++    new TabItem(Icons.person, "Profile", Colors.white, labelStyle: TextStyle(color: Color(0xff626B70), fontWeight: FontWeight.bold)),
++
++  ]);
++
++  CircularBottomNavigationController _navigationController;
++
++  @override
++  void initState() {
++    super.initState();
++    _navigationController = new CircularBottomNavigationController(selectedPos);
++    homePage = HomePage();
++    cameraPage=CameraPage();
++    profileScreen=ProfileScreen();
++    super.initState();
++    page = [homePage,cameraPage,profileScreen];
++    currentPage = homePage;
++  }
++
++  @override
++  Widget build(BuildContext context) {
++    return Scaffold(
++      key: scaffoldKey,
++      drawer: MainDrawer(),
++      body: Stack(
++        children: <Widget>[
++          Align( child: currentPage),
++          Padding(
++              padding: EdgeInsets.only(top: 28,left: 20),
++              child:Align(
++                  alignment: Alignment.topLeft,
++                  child: IconButton(onPressed:(){
++                    scaffoldKey.currentState.openDrawer();
++                  }, icon: Icon(Icons.menu,size: 35,color: Color(0xff3FB569),), )
++              )
++          ),
++
++          Padding(
++
++            padding: EdgeInsets.only(bottom: bottomNavBarHeight),
++          ),
++
++          Align(alignment: Alignment.bottomCenter, child: bottomNav()),
++
++
++
++
++
++        ],
++      ),
++    );
++  }
++
++
++
++  Widget bottomNav() {
++    return CircularBottomNavigation(
++      tabItems,
++
++      selectedIconColor: Color(0xff626B70),
++      normalIconColor: Color(0xff626B70),
++      controller: _navigationController,
++      barHeight: bottomNavBarHeight,
++      selectedPos: currentTabIndex,
++      barBackgroundColor: Colors.white,
++      animationDuration: Duration(milliseconds: 300),
++      selectedCallback: (int selectedPos) {
++        setState(() {
++          // this.selectedPos = selectedPos;
++          currentTabIndex = selectedPos;
++          currentPage = page[selectedPos];
++        });
++      },
++    );
++  }
++}
+Index: lib/screen/forgot_password.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen/forgot_password.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen/forgot_password.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,88 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++import 'package:sahab_app/screen/reset_password.dart';
++import 'package:sahab_app/screen/sign_in.dart';
++import 'package:sahab_app/widgets/insert_name_and_last_name.dart';
++class ForgotPassword extends StatefulWidget {
++  @override
++  _ForgotPasswordState createState() => _ForgotPasswordState();
++}
++
++class _ForgotPasswordState extends State<ForgotPassword> {
++  @override
++  Widget build(BuildContext context) {
++    return SafeArea(
++      child: Scaffold(
++        body: Padding(
++          padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++          child: SingleChildScrollView(
++            child: Container(
++              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
++              child: Column(
++                mainAxisAlignment: MainAxisAlignment.start,
++                crossAxisAlignment: CrossAxisAlignment.start,
++                children: <Widget>[
++                  Image.asset(
++                    'images/logo.png',
++                    width: 140,
++                    height: 60,
++                  ),
++                  sizedBox22,
++                  Container(
++                    width: double.infinity,
++                    child: Text(
++                      "Forgot Password ?",
++                      style: KSignIntoYourAccount,
++                    ),
++                  ),
++                  sizedBox8,
++                  Text(
++                    "Enter your email and we will send you a reset link.",style: KPleaseEnter,
++                  ),
++                  sizedBox22,
++                  InsertNameAndLastName(title: "Email",),
++                  sizedBox22,
++                  Row(
++                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
++
++                    children: <Widget>[
++                      GestureDetector(
++                          onTap:  () {
++                          Navigator.of(context).pushReplacement(MaterialPageRoute(
++                          builder: (BuildContext context) => SignIn()));
++                          },
++                          child: Text("Back to Sign In",style: KSign,)),
++                      GestureDetector(
++                        onTap:  () {
++                          Navigator.of(context).pushReplacement(MaterialPageRoute(
++                          builder: (BuildContext context) => ResetPassword()));
++                          },
++                        child: Container(
++
++                          height: 37,
++                          decoration: BoxDecoration(
++                              borderRadius: BorderRadius.circular(8),
++                              color: KColorSignIn,
++                              boxShadow: [
++                                KBoxShadow
++                              ]),
++                          child: Center(
++                            child: Container(
++                                margin: EdgeInsets.all(8),
++                                child: Text("Send Reset Link",style: KContinueWith,)),
++                          ),
++                        ),
++                      )
++                    ],
++                  )
++
++
++                ],
++              ),
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
+Index: lib/screen/reset_password.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen/reset_password.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen/reset_password.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,84 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++import 'package:sahab_app/screen/sign_in.dart';
++import 'package:sahab_app/widgets/confirm_password.dart';
++import 'package:sahab_app/widgets/password.dart';
++class ResetPassword extends StatefulWidget {
++  @override
++  _ResetPasswordState createState() => _ResetPasswordState();
++}
++
++class _ResetPasswordState extends State<ResetPassword> {
++  @override
++  Widget build(BuildContext context) {
++    return SafeArea(
++      child: Scaffold(
++        body: Padding(
++          padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++          child: SingleChildScrollView(
++            child: Container(
++              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
++              child: Column(
++                mainAxisAlignment: MainAxisAlignment.start,
++                crossAxisAlignment: CrossAxisAlignment.start,
++                children: <Widget>[
++                  Image.asset(
++                    'images/logo.png',
++                    width: 140,
++                    height: 60,
++                  ),
++                  sizedBox22,
++                  Container(
++                    width: double.infinity,
++                    child: Text(
++                      "Reset Password",
++                      style: KSignIntoYourAccount,
++                    ),
++                  ),
++                  sizedBox8,
++                  Text(
++                    "Please enter your new password.",style: KPleaseEnter,
++                  ),
++                  sizedBox22,
++                  PasswordWidget(),
++                  sizedBox22,
++                  ConfirmPassword(),
++                  sizedBox22,
++                  Row(
++                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
++
++                    children: <Widget>[
++                      GestureDetector(
++                          onTap:  () {
++                            Navigator.of(context).pushReplacement(MaterialPageRoute(
++                            builder: (BuildContext context) => SignIn()));
++                            },
++                          child: Text("Cancel",style: KSign,)),
++                      Container(
++
++                        height: 37,
++                        decoration: BoxDecoration(
++                            borderRadius: BorderRadius.circular(8),
++                            color: KColorSignIn,
++                            boxShadow: [
++                              KBoxShadow
++                            ]),
++                        child: Center(
++                          child: Container(
++                              margin: EdgeInsets.all(8),
++                              child: Text("Reset Password",style: KContinueWith,)),
++                        ),
++                      )
++                    ],
++                  )
++
++
++                ],
++              ),
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
+Index: lib/screen/sign_in.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen/sign_in.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen/sign_in.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,120 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++import 'package:sahab_app/screen/sign_up.dart';
++import 'package:sahab_app/widgets/bottom_sign.dart';
++import 'package:sahab_app/widgets/continue_with.dart';
++import 'package:sahab_app/widgets/password.dart';
++import 'package:sahab_app/widgets/phone_number.dart';
++import 'package:sahab_app/widgets/row_sign.dart';
++
++import 'forgot_password.dart';
++import '../main_screen.dart';
++
++class SignIn extends StatefulWidget {
++  @override
++  _SignInState createState() => _SignInState();
++}
++
++class _SignInState extends State<SignIn> {
++  TextEditingController number = TextEditingController();
++
++  bool _checked = false;
++
++
++
++  @override
++  Widget build(BuildContext context) {
++    return SafeArea(
++      child: Scaffold(
++        body: Padding(
++          padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++          child: SingleChildScrollView(
++            child: Container(
++              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
++              child: Column(
++                mainAxisAlignment: MainAxisAlignment.start,
++                crossAxisAlignment: CrossAxisAlignment.start,
++                children: <Widget>[
++                  Image.asset(
++                    'images/logo.png',
++                    width: 140,
++                    height: 60,
++                  ),
++                  sizedBox22,
++                  Container(
++                    width: double.infinity,
++                    child: Text(
++                      "Sign In to Your Account",
++                      style: KSignIntoYourAccount,
++                    ),
++                  ),
++                  sizedBox22,
++                  ContinueWith(
++                    image: 'images/facebook.png',
++                    continueWith: 'Continue with Facebook',
++                    color: KColorFaceBook,
++                  ),
++                  sizedBox20,
++                  ContinueWith(
++                    image: 'images/google-symbol.png',
++                    continueWith: 'Continue with Google',
++                    color: KColoGoogle,
++                  ),
++                  sizedBox22,
++                  PhoneNumberInput(number: number),
++                  sizedBox22,
++                  PasswordWidget(),
++                  SizedBox(height: 8),
++                  CheckboxListTile(
++                    title: Text(
++                      "Keep me signed in",
++                      style: KKeepMe,
++                    ),
++                    controlAffinity: ListTileControlAffinity.leading,
++                    value: _checked,
++                    onChanged: (bool value) {
++                      setState(() {
++                        _checked = value;
++                      });
++                    },
++                  ),
++                  sizedBox8,
++                  GestureDetector(
++                    onTap: (){
++                      Navigator.of(context).pushReplacement(MaterialPageRoute(
++                          builder: (BuildContext context) => MainScreen()));
++                    },
++                    child: BottomSign(
++                      title: "Sign In",
++                    ),
++                  ),
++                  sizedBox20,
++                  RowSign(
++                    title1: "Don’t have an account?",
++                    title2: "  Sign Up",
++                    onTao: () {
++                      Navigator.of(context).pushReplacement(MaterialPageRoute(
++                          builder: (BuildContext context) => SignUp()));
++                    },
++                  ),
++                  sizedBox20,
++                  RowSign(
++                      title1: "Forgot your password?",
++                      title2: "  Reset Password",
++                    onTao: () {
++                      Navigator.of(context).pushReplacement(MaterialPageRoute(
++                          builder: (BuildContext context) => ForgotPassword()));
++                    },
++                  ),
++                  SizedBox(
++                    height: 50,
++                  )
++                ],
++              ),
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
+Index: lib/screen/sign_up.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen/sign_up.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen/sign_up.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,106 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++import 'package:sahab_app/screen/sign_in.dart';
++import 'package:sahab_app/screen/verify_your_number.dart';
++import 'package:sahab_app/widgets/bottom_sign.dart';
++import 'package:sahab_app/widgets/confirm_password.dart';
++import 'package:sahab_app/widgets/insert_name_and_last_name.dart';
++import 'package:sahab_app/widgets/password.dart';
++import 'package:sahab_app/widgets/phone_number.dart';
++import 'package:sahab_app/widgets/row_sign.dart';
++
++class SignUp extends StatefulWidget {
++  @override
++  _SignUpState createState() => _SignUpState();
++}
++
++class _SignUpState extends State<SignUp> {
++  TextEditingController number = TextEditingController();
++
++
++
++  @override
++  Widget build(BuildContext context) {
++    return SafeArea(
++      child: Scaffold(
++        body: Padding(
++          padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++          child: SingleChildScrollView(
++            child: Container(
++              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
++              child: Column(
++                mainAxisAlignment: MainAxisAlignment.start,
++                crossAxisAlignment: CrossAxisAlignment.start,
++                children: <Widget>[
++                  Image.asset(
++                    'images/logo.png',
++                    width: 140,
++                    height: 60,
++                  ),
++                  sizedBox22,
++                  Container(
++                    width: double.infinity,
++                    child: Text(
++                      "Sign Up For an Account",
++                      style: KSignIntoYourAccount,
++                    ),
++                  ),
++                  sizedBox22,
++                  InsertNameAndLastName(
++                    title: "First Name *",
++                  ),
++                  sizedBox20,
++                  InsertNameAndLastName(
++                    title: "Last Name *",
++                  ),
++                  sizedBox22,
++                  PhoneNumberInput(number: number),
++                  sizedBox22,
++                  PasswordWidget(),
++                  sizedBox22,
++                  ConfirmPassword(),
++                  sizedBox22,
++                  RichText(
++                    text: TextSpan(children: [
++                      TextSpan(
++                          text: "By signing up, you agree to our ",
++                          style: KSpanTextFirst),
++                      TextSpan(text: "Terms ", style: KSpanTextSecond),
++                      TextSpan(text: "and ", style: KSpanTextFirst),
++                      TextSpan(
++                          text: "Privacy Policy. ", style: KSpanTextSecond),
++                    ]),
++                  ),
++                  sizedBox8,
++                  GestureDetector(
++                      onTap: () {
++                        Navigator.of(context).pushReplacement(MaterialPageRoute(
++                            builder: (BuildContext context) => VerifyYourNumber()));
++                      },
++                      child: BottomSign(
++                        title: "Sign Up",
++                      )),
++                  sizedBox22,
++                  RowSign(
++                    title1: "Already have an account? ",
++                    title2: "  Sign In",
++                    onTao: () {
++                      Navigator.of(context).pushReplacement(MaterialPageRoute(
++                          builder: (BuildContext context) => SignIn()));
++                    },
++                  ),
++                  sizedBox20,
++                  SizedBox(
++                    height: 50,
++                  )
++                ],
++              ),
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
++
++
+Index: lib/screen/verify_your_number.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen/verify_your_number.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen/verify_your_number.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,64 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class VerifyYourNumber extends StatefulWidget {
++  @override
++  _VerifyYourNumberState createState() => _VerifyYourNumberState();
++}
++
++class _VerifyYourNumberState extends State<VerifyYourNumber> {
++  @override
++  Widget build(BuildContext context) {
++    return SafeArea(
++      child: Scaffold(
++        body: Padding(
++          padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++          child: SingleChildScrollView(
++            child: Container(
++              margin: EdgeInsets.symmetric(vertical: 8, horizontal: 8),
++              child: Column(
++                mainAxisAlignment: MainAxisAlignment.start,
++                crossAxisAlignment: CrossAxisAlignment.start,
++                children: <Widget>[
++                  Image.asset(
++                    'images/logo.png',
++                    width: 140,
++                    height: 60,
++                  ),
++                  sizedBox22,
++                  Container(
++                    width: double.infinity,
++                    child: Text(
++                      "Sign Up For an Account",
++                      style: KSignIntoYourAccount,
++                    ),
++                  ),
++                  sizedBox8,
++                  Text(
++                    "Please enter the code sent to your number.",style: KPleaseEnter,
++                  ),
++                  sizedBox22,
++                  // PinFieldAutoFill(
++                  //     decoration: UnderlineDecoration(
++                  //         textStyle: TextStyle(fontSize: 20, color: Colors.black),
++                  //         colorBuilder: FixedColorBuilder(Colors.black.withOpacity(0.3))
++                  //
++                  //     ),codeLength: 4,
++                  //   controller: null,
++                  //   onCodeChanged: null,
++                  //   autofocus: null,
++                  //   onCodeSubmitted: null,
++                  //
++                  //
++                  // ),
++
++
++
++                ],
++              ),
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
+Index: lib/screen2/camera_page.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen2/camera_page.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen2/camera_page.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,38 @@
++import 'package:flutter/material.dart';
++import 'dart:io';
++
++import 'package:image_picker/image_picker.dart';
++
++class CameraPage extends StatefulWidget {
++  @override
++  _CameraPageState createState() => _CameraPageState();
++}
++
++class _CameraPageState extends State<CameraPage> {
++  File imageFile;
++    _openCamera()async{
++    final picture=await ImagePicker().getImage(source: ImageSource.camera);
++    this.setState(() {
++      imageFile=File(picture.path) ;
++    });
++
++  }
++  @override
++  void initState() {
++
++      setState(() {
++
++        _openCamera();
++      });
++
++    super.initState();
++  }
++
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++      // child: imageFile==null?Text("No Image Selected"):Image.file(imageFile)
++    );
++  }
++}
++
+Index: lib/screen2/home_page.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen2/home_page.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen2/home_page.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,61 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class HomePage extends StatelessWidget {
++  @override
++  Widget build(BuildContext context) {
++    return SingleChildScrollView(
++      child: Padding(
++        padding: const EdgeInsets.only(left: 30, top: 37, right: 30),
++        child: Column(
++          mainAxisAlignment: MainAxisAlignment.start,
++          crossAxisAlignment: CrossAxisAlignment.start,
++          children: <Widget>[
++            Padding(
++                padding: EdgeInsets.only(top: 50,right: 140,bottom: 30),
++                child: Text("Welcome Ali",style: KSignIntoYourAccount,)),
++            Container(
++              child: Column(
++                children: <Widget>[
++                  CardTextHome(),
++                  CardTextHome(),
++                  CardTextHome(),
++                  CardTextHome(),
++                  CardTextHome(),
++                ],
++              ),
++            )
++
++          ],
++        ),
++      ),
++    );
++  }
++}
++
++class CardTextHome extends StatelessWidget {
++  const CardTextHome({
++    Key key,
++  }) : super(key: key);
++
++  @override
++  Widget build(BuildContext context) {
++    return Padding(
++      padding: EdgeInsets.only(bottom: 8),
++      child: Card(
++        shape: RoundedRectangleBorder(
++          borderRadius: BorderRadius.circular(8)
++        ),
++        color: Color(0xffF0F3F5),
++        child: Container(
++          margin: EdgeInsets.all(16),
++          padding: EdgeInsets.only(right: 8,left: 16,top: 8,bottom: 24),
++          child: Text("Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when",style: TextStyle(
++            fontSize: 16,
++            letterSpacing: 0.3,
++            fontWeight: FontWeight.w400
++          ),),
++        ),
++      ),
++    );
++  }
++}
+Index: lib/screen2/models.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen2/models.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen2/models.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,1 @@
++// TODO Implement this library.
+\ No newline at end of file
+Index: lib/screen2/profile_screen.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/screen2/profile_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/screen2/profile_screen.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,140 @@
++import 'package:flutter/cupertino.dart';
++import 'package:flutter/foundation.dart';
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class ProfileScreen extends StatefulWidget {
++  @override
++  _ProfileScreenState createState() => _ProfileScreenState();
++}
++
++class _ProfileScreenState extends State<ProfileScreen> {
++  @override
++  Widget build(BuildContext context) {
++    return Padding(
++      padding: const EdgeInsets.only(left: 30, top: 37, right: 30,bottom: 100),
++      child: Column(
++        mainAxisAlignment: MainAxisAlignment.start,
++        crossAxisAlignment: CrossAxisAlignment.start,
++        children: <Widget>[
++          Padding(
++              padding: EdgeInsets.only(top: 45,right: 140,bottom: 10),
++              child: Text("Welcome Ali",style: KSignIntoYourAccount,)),
++        Expanded (
++           child: ListView(
++
++
++             shrinkWrap: true ,
++
++             children: <Widget>[
++               MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
++                 ,title: "Under Review",color: Color(0xff3FB569),),
++               MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
++                 ,title: "Rejected",color: Color(0xffD23939),),
++
++               MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
++                 ,title: "Pending",color: Color(0xff07303E),),
++               MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
++                 ,title: "Pending",color: Color(0xff07303E),),
++             ],
++           ),
++         ),
++
++
++
++
++        ],
++      ),
++    );
++  }
++}
++
++class MaterialCard extends StatelessWidget {
++  final Color color;
++  final String title,text;
++
++  const MaterialCard({Key key, this.color, this.title, this.text}) : super(key: key);
++
++  @override
++  Widget build(BuildContext context) {
++    return Padding(
++      padding: EdgeInsets.only(top: 8,right: 8,left: 8,bottom: 20),
++      child: Container(
++        height: 140,
++        child: Material(
++          color: Color(0xffF0F3F5),
++          elevation: 5.0,
++          borderRadius: BorderRadius.circular(8),
++          child: Container(
++            child: Row(
++              children: <Widget>[
++                Container(
++                  height: 140,
++                  width: 30,
++                  decoration: BoxDecoration(
++                    borderRadius: BorderRadius.only(topLeft: Radius.circular(8),bottomLeft: Radius.circular(8) ),
++                    color: color,
++                  ),
++
++                ),
++                Expanded(
++                  child: Padding(
++                    padding: EdgeInsets.all(8),
++                    child: Column(
++                      mainAxisAlignment: MainAxisAlignment.start,
++                      children: <Widget>[
++                        Row(
++                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
++                          children: <Widget>[
++                            Align(
++                              heightFactor: 1.5,
++                              alignment: Alignment.topLeft,
++                              child: Container(
++                                child: Text(
++                                  title,style: KTitleCard,
++                                ),
++
++                              ),
++                            ),
++                            Align(
++                              heightFactor: 1.3,
++                              alignment: Alignment.topRight,
++                              child: Container(
++                                  child:Column(
++                                    children: <Widget>[
++                                      Icon(
++                                          Icons.close
++                                      ),
++                                    ],
++                                  )
++                              ),
++                            ),
++                          ],
++                        ),
++
++
++                        Align(
++                          heightFactor: 1.2,
++                          alignment: Alignment.centerLeft,
++                          child: Container(
++                            child:Column(
++                              children: <Widget>[
++                                Text(text)
++                              ],
++                            )
++                          ),
++                        ),
++
++                      ],
++                    ),
++                  ),
++                )
++              ],
++            ),
++          ),
++        ),
++      ),
++    );
++  }
++}
++
++
+Index: lib/widgets/bottom_sign.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/widgets/bottom_sign.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/widgets/bottom_sign.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,23 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class BottomSign extends StatelessWidget {
++  final String title;
++
++  const BottomSign({Key key, this.title}) : super(key: key);
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++      width: double.infinity,
++      height: 37,
++      decoration: BoxDecoration(
++          borderRadius: BorderRadius.circular(8),
++          color: KColorSignIn,
++          boxShadow: [
++            KBoxShadow
++          ]),
++      child: Center(
++        child: Text(title,style: KContinueWith,),
++      ),
++    );
++  }
++}
+\ No newline at end of file
+Index: lib/widgets/confirm_password.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/widgets/confirm_password.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/widgets/confirm_password.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,29 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class ConfirmPassword extends StatelessWidget {
++  const ConfirmPassword({
++    Key key,
++  }) : super(key: key);
++
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++        decoration: BoxDecoration(
++            color: KWhite,
++            border: Border.all(color: KBlack, width: 0.2),
++            borderRadius: BorderRadius.circular(8),
++            boxShadow: [KBoxShadow]),
++        child: Padding(
++          padding: const EdgeInsets.only(left: 8.0),
++          child: TextField(
++            decoration: InputDecoration(
++              border: InputBorder.none,
++              hintText: "Confirm Password *",
++              fillColor: Colors.white,
++              hintStyle: KHintStyle,
++            ),
++            obscureText: true,
++          ),
++        ));
++  }
++}
+\ No newline at end of file
+Index: lib/widgets/continue_with.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/widgets/continue_with.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/widgets/continue_with.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,42 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class ContinueWith extends StatelessWidget {
++  final String image;
++  final String continueWith;
++  final Color color;
++
++  const ContinueWith({Key key,@required this.image, @required this.continueWith,@required this.color}) : super(key: key);
++
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++      width: double.infinity,
++      height: 37,
++      decoration: BoxDecoration(
++          borderRadius: BorderRadius.circular(8),
++          color: color,
++          boxShadow: [
++            KBoxShadow
++          ]
++      ),
++      child: Row(
++        mainAxisAlignment: MainAxisAlignment.start,
++        children: <Widget>[
++          Padding(
++            padding: const EdgeInsets.only(left: 16, right: 20),
++            child: Image.asset(
++              image,
++              width: 22,
++              height: 22,
++              color: KWhite,
++            ),
++          ),
++          Text(
++            continueWith,
++            style: KContinueWith,
++          )
++        ],
++      ),
++    );
++  }
++}
+\ No newline at end of file
+Index: lib/widgets/insert_name_and_last_name.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/widgets/insert_name_and_last_name.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/widgets/insert_name_and_last_name.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,33 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class InsertNameAndLastName extends StatelessWidget {
++  final String title;
++
++  const InsertNameAndLastName({Key key, this.title}) : super(key: key);
++
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++      decoration: BoxDecoration(
++          color: KWhite,
++          border: Border.all(color: KBlack, width: 0.2),
++          borderRadius: BorderRadius.circular(8),
++          boxShadow: [KBoxShadow]),
++      child: Padding(
++        padding: const EdgeInsets.only(left: 8.0),
++        child: Padding(
++            padding: const EdgeInsets.only(left: 8),
++            child: TextField(
++              decoration: InputDecoration(
++                border: InputBorder.none,
++                hintText:title ,
++                fillColor: Colors.white,
++                hintStyle: KHintStyle,
++
++
++
++              ),
++            )),
++      ),);
++  }
++}
+\ No newline at end of file
+Index: lib/widgets/password.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/widgets/password.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/widgets/password.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,61 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class PasswordWidget extends StatefulWidget {
++
++  @override
++  _PasswordWidgetState createState() => _PasswordWidgetState();
++}
++
++class _PasswordWidgetState extends State<PasswordWidget> {
++  bool _isHidden = true;
++
++  void _toggleVisibility() {
++    setState(() {
++      _isHidden = !_isHidden;
++    });
++  }
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++      decoration: BoxDecoration(
++          color: KWhite,
++          border: Border.all(color: KBlack, width: 0.2),
++          borderRadius: BorderRadius.circular(8),
++          boxShadow: [KBoxShadow]),
++      child: Padding(
++          padding: const EdgeInsets.only(left: 8.0),
++          child: buildTextFieldPassword("Password")),
++    );
++  }
++  Widget buildTextFieldPassword(String hintText) {
++    return Padding(
++      padding: const EdgeInsets.only(left: 8),
++      child: TextField(
++        decoration: InputDecoration(
++          border: InputBorder.none,
++          hintText: hintText,
++          fillColor: Colors.white,
++          hintStyle: KHintStyle,
++
++
++          // prefixIcon: hintText == "Email" ? Icon(Icons.email) : Icon(Icons.lock),
++          suffixIcon: hintText == "Password"
++              ? IconButton(
++            onPressed: _toggleVisibility,
++            icon: _isHidden
++                ? Icon(
++              Icons.visibility_off,
++              color: Colors.grey,
++            )
++                : Icon(
++              Icons.visibility,
++              color: Colors.grey,
++            ),
++          )
++              : null,
++        ),
++        obscureText: hintText == "Password" ? _isHidden : false,
++      ),
++    );
++  }
++}
+Index: lib/widgets/phone_number.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/widgets/phone_number.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/widgets/phone_number.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,58 @@
++import 'package:country_code_picker/country_code_picker.dart';
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class PhoneNumberInput extends StatelessWidget {
++  const PhoneNumberInput({
++    Key key,
++    @required this.number,
++  }) : super(key: key);
++
++  final TextEditingController number;
++
++  @override
++  Widget build(BuildContext context) {
++    return Container(
++      decoration: BoxDecoration(
++          color: KWhite,
++          border: Border.all(color: KBlack, width: 0.2),
++          borderRadius: BorderRadius.circular(8),
++          boxShadow: [
++            KBoxShadow
++          ]),
++      child: Padding(
++          padding: const EdgeInsets.only(left: 8.0),
++          child: Row(
++            mainAxisAlignment: MainAxisAlignment.spaceAround,
++            children: <Widget>[
++              CountryCodePicker(
++                initialSelection: 'JO',
++                enabled: false,
++                hideMainText: false,
++                showCountryOnly: true,
++                showFlagDialog: false,
++                showFlag: true,
++                showFlagMain: true,
++                showDropDownButton: false,
++              ),
++              Container(
++                width: 2,
++                height: 22,
++                color: Color(0xff707678),
++              ),
++              Container(
++                width: MediaQuery.of(context).size.width / 2,
++                child: TextField(
++                  keyboardType: TextInputType.phone,
++                  controller: number,
++                  decoration: InputDecoration(
++                      border: InputBorder.none,
++                      hintText: " 79-xxx-xxx ",
++                      hintStyle: KHintStyle
++                  ),
++                ),
++              ),
++            ],
++          )),
++    );
++  }
++}
+\ No newline at end of file
+Index: lib/widgets/row_sign.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- lib/widgets/row_sign.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ lib/widgets/row_sign.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,23 @@
++import 'package:flutter/material.dart';
++import 'package:sahab_app/helper/style.dart';
++class RowSign extends StatelessWidget {
++  final String title1,title2;
++  final Function onTao;
++
++  const RowSign({Key key, @required this.title1, @required this.title2,this.onTao}) : super(key: key);
++
++
++  @override
++  Widget build(BuildContext context) {
++    return Row(
++      children: <Widget>[
++        Text(
++          title1,style: KKeepMe,
++        ),
++        GestureDetector(
++            onTap: onTao,
++            child: Text(title2,style: KSign))
++      ],
++    );
++  }
++}
+\ No newline at end of file
+Index: pubspec.lock
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pubspec.lock	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ pubspec.lock	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,306 @@
++# Generated by pub
++# See https://dart.dev/tools/pub/glossary#lockfile
++packages:
++  archive:
++    dependency: transitive
++    description:
++      name: archive
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.0.13"
++  args:
++    dependency: transitive
++    description:
++      name: args
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.6.0"
++  async:
++    dependency: transitive
++    description:
++      name: async
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.4.1"
++  boolean_selector:
++    dependency: transitive
++    description:
++      name: boolean_selector
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.0.0"
++  charcode:
++    dependency: transitive
++    description:
++      name: charcode
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.1.3"
++  circular_bottom_navigation:
++    dependency: "direct main"
++    description:
++      name: circular_bottom_navigation
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.0.1"
++  collection:
++    dependency: transitive
++    description:
++      name: collection
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.14.12"
++  community_material_icon:
++    dependency: "direct main"
++    description:
++      name: community_material_icon
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "5.8.55"
++  convert:
++    dependency: transitive
++    description:
++      name: convert
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.1.1"
++  country_code_picker:
++    dependency: "direct main"
++    description:
++      name: country_code_picker
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.7.0"
++  crypto:
++    dependency: transitive
++    description:
++      name: crypto
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.1.4"
++  cupertino_icons:
++    dependency: "direct main"
++    description:
++      name: cupertino_icons
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "0.1.3"
++  flutter:
++    dependency: "direct main"
++    description: flutter
++    source: sdk
++    version: "0.0.0"
++  flutter_plugin_android_lifecycle:
++    dependency: transitive
++    description:
++      name: flutter_plugin_android_lifecycle
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.0.11"
++  flutter_test:
++    dependency: "direct dev"
++    description: flutter
++    source: sdk
++    version: "0.0.0"
++  flutter_web_plugins:
++    dependency: transitive
++    description: flutter
++    source: sdk
++    version: "0.0.0"
++  fluttertoast:
++    dependency: "direct main"
++    description:
++      name: fluttertoast
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "7.1.6"
++  http:
++    dependency: transitive
++    description:
++      name: http
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "0.12.2"
++  http_parser:
++    dependency: transitive
++    description:
++      name: http_parser
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "3.1.4"
++  image:
++    dependency: transitive
++    description:
++      name: image
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.1.12"
++  image_picker:
++    dependency: "direct main"
++    description:
++      name: image_picker
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "0.6.7+21"
++  image_picker_platform_interface:
++    dependency: transitive
++    description:
++      name: image_picker_platform_interface
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.1.1"
++  matcher:
++    dependency: transitive
++    description:
++      name: matcher
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "0.12.6"
++  meta:
++    dependency: transitive
++    description:
++      name: meta
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.1.8"
++  modal_bottom_sheet:
++    dependency: transitive
++    description:
++      name: modal_bottom_sheet
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.0.0+1"
++  motion_tab_bar:
++    dependency: "direct main"
++    description:
++      name: motion_tab_bar
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "0.1.5"
++  path:
++    dependency: transitive
++    description:
++      name: path
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.6.4"
++  pedantic:
++    dependency: transitive
++    description:
++      name: pedantic
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.9.0"
++  petitparser:
++    dependency: transitive
++    description:
++      name: petitparser
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.4.0"
++  pin_input_text_field:
++    dependency: transitive
++    description:
++      name: pin_input_text_field
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "3.3.0"
++  pinput:
++    dependency: "direct main"
++    description:
++      name: pinput
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.0.0"
++  plugin_platform_interface:
++    dependency: transitive
++    description:
++      name: plugin_platform_interface
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.0.3"
++  quiver:
++    dependency: transitive
++    description:
++      name: quiver
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.1.3"
++  sky_engine:
++    dependency: transitive
++    description: flutter
++    source: sdk
++    version: "0.0.99"
++  sms_autofill:
++    dependency: "direct main"
++    description:
++      name: sms_autofill
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.2.7"
++  source_span:
++    dependency: transitive
++    description:
++      name: source_span
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.7.0"
++  stack_trace:
++    dependency: transitive
++    description:
++      name: stack_trace
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.9.3"
++  stream_channel:
++    dependency: transitive
++    description:
++      name: stream_channel
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.0.0"
++  string_scanner:
++    dependency: transitive
++    description:
++      name: string_scanner
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.0.5"
++  term_glyph:
++    dependency: transitive
++    description:
++      name: term_glyph
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.1.0"
++  test_api:
++    dependency: transitive
++    description:
++      name: test_api
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "0.2.15"
++  typed_data:
++    dependency: transitive
++    description:
++      name: typed_data
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "1.1.6"
++  vector_math:
++    dependency: transitive
++    description:
++      name: vector_math
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "2.0.8"
++  xml:
++    dependency: transitive
++    description:
++      name: xml
++      url: "https://pub.dartlang.org"
++    source: hosted
++    version: "3.6.1"
++sdks:
++  dart: ">=2.7.0 <3.0.0"
++  flutter: ">=1.12.13 <2.0.0"
+Index: pubspec.yaml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- pubspec.yaml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ pubspec.yaml	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,34 @@
++name: sahab_app
++description: A new Flutter application.
++
++
++version: 1.0.0+1
++
++environment:
++  sdk: ">=2.7.0 <3.0.0"
++
++dependencies:
++  flutter:
++    sdk: flutter
++
++  cupertino_icons: ^0.1.3
++  community_material_icon:
++  country_code_picker:
++  motion_tab_bar:
++  circular_bottom_navigation:
++  pinput:
++  fluttertoast:
++  image_picker:
++  sms_autofill:
++
++
++dev_dependencies:
++  flutter_test:
++    sdk: flutter
++
++flutter:
++
++  uses-material-design: true
++
++  assets:
++    - images/
+Index: test/widget_test.dart
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- test/widget_test.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
++++ test/widget_test.dart	(revision b09b48657cf4b749753077e7845fa5820fd68455)
+@@ -0,0 +1,30 @@
++// This is a basic Flutter widget test.
++//
++// To perform an interaction with a widget in your test, use the WidgetTester
++// utility that Flutter provides. For example, you can send tap and scroll
++// gestures. You can also use WidgetTester to find child widgets in the widget
++// tree, read text, and verify that the values of widget properties are correct.
++
++import 'package:flutter/material.dart';
++import 'package:flutter_test/flutter_test.dart';
++
++import 'package:sahab_app/main.dart';
++
++void main() {
++  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
++    // Build our app and trigger a frame.
++    await tester.pumpWidget(MyApp());
++
++    // Verify that our counter starts at 0.
++    expect(find.text('0'), findsOneWidget);
++    expect(find.text('1'), findsNothing);
++
++    // Tap the '+' icon and trigger a frame.
++    await tester.tap(find.byIcon(Icons.add));
++    await tester.pump();
++
++    // Verify that our counter has incremented.
++    expect(find.text('0'), findsNothing);
++    expect(find.text('1'), findsOneWidget);
++  });
++}
+diff --git android/app/src/main/res/mipmap-hdpi/ic_launcher.png android/app/src/main/res/mipmap-hdpi/ic_launcher.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..db77bb4b7b0906d62b1847e87f15cdcacf6a4f29
+GIT binary patch
+literal 544
+zc%17D@N?(olHy`uVBq!ia0vp^9w5xY3?!3`olAj~WQl7;NpOBzNqJ&XDuZK6ep0G}
+zXKrG8YEWuoN@d~6R2!h8bpbvhu0Wd6uZuB!w&u2PAxD2eNXD>P5D~Wn-+^4P$V{M!
+zMA=e^0^4<u8H^$sEK(S?y%`OH8SU~I?eZDj>lr<p7=7A72Ksd~`t>jdPGk(4#27T0
+zF?b4N=yb-=8H`~wz=ng&XR=ObawuSOE@Sd+VD@ce_U~d2=oZVEAf7){vSOK3-3ICA
+zZPIPKWZL%tEp^!sa>?6;Qno-B3zr1>1v3Z$K|nwP2sE4rf%}pIPksTVUwXPYhD02G
+zd*(V{lY@XmV91-j3GcglWVL_&w@+)~;PzHJw~qhV&h_S&T~3}pYw!L1^kjlFpCy=h
+zKPRM7zqR0#;^tL#mpNMv{ARQiS8%>&QQh-+dW`z_ork^FP2QR}-+JB=3o&)qg1AZN
+zIlU&zxN}+5X)gLa#iD(xlC{sg$DWJMc?*@xc(#3>V&He_(P~8*)xd{yUfZobF+tB-
+z)<|f{=d!d0mX}*3Uvmpg?|XglN*l}4!<&rfoXPR<Fq-|=uYL_Phu5;O{IAQ{8WyBv
+y^}dt2Q4myV+LWN78OAa}`KY(b-&J4M+cNa3D6?4S?K}YVG=rzBpUXO@geCwmqt#IW
+
+diff --git android/app/src/main/res/mipmap-mdpi/ic_launcher.png android/app/src/main/res/mipmap-mdpi/ic_launcher.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..17987b79bb8a35cc66c3c1fd44f5a5526c1b78be
+GIT binary patch
+literal 442
+zc%17D@N?(olHy`uVBq!ia0vp^1|ZDA3?vioaBc-sk|nMYCBgY=CFO}lsSJ)O`AMk?
+zp1FzXsX?iUDV2pMQ*D5Xx&nMcT!A!W`0S9QKQy;}1Cl^CgaH?UAfPyVct3=};#>rj
+z3OoW5XRyg;bSh=^?PB!nW(=9i7&479bUI_$OvbQTjNw2un_1VJ*)WjRDUa2+fi1XG
+zu5*`s?*YZBr<G=1QkruWXpZ4ds8NCb{j5OOh?WHT1v3Z;C@2^h81&DdzkdJu^XK1#
+zK>ntFVW5Jgo-U3d9>?EaIVsd+AmDnjgZbQ|rlv(}mH0aT|F7ojyqm)_x0O4%^7NIR
+zS9fzHe*g2qZ+68w>-T^1Ys)>PE57cFujH(~%h<PG%*LPfdOg?6>g}7Zop$=U=)j}h
+z^`b8}UZ_-zdJ?+ud(o-=+{*uTp7GqD6IdW?E-}B1z5BGG>`am8Iyajf3$2c<=KauJ
+yvp-@T;|<q+-H${X;(de<Z0ssy2otH_#D05X*sUWmCzk^q%;4$j=d#Wzp$P!uPrJzg
+
+diff --git android/app/src/main/res/mipmap-xhdpi/ic_launcher.png android/app/src/main/res/mipmap-xhdpi/ic_launcher.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..09d4391482be68e9e4a07fab769b5de337d16eb1
+GIT binary patch
+literal 721
+zc%17D@N?(olHy`uVBq!ia0vp^2_VeD3?#3*wSy!iOI#yLg7ec#$`gxH85~pclTsBt
+za}(23gHjVyDhp4h+5i=O3-AeX1=1l$e`s#|#^}+&7(N@w0CIr{$Oe+Uk^K-ZP~83C
+zcc@hG6rikF&NPT(23>y!y&wkt5C($~2D>~)O*cj@FGjOCM)M>_ixfudOh)?xMu#Fs
+z#}Y=@YDTwOM)x{K_j*Q;dPdJ?Mz0n|pLRx{4n|)f>SXlmV)XB04CrSJn#dS5nK5`W
+z$gYs7jG@yR!)7ps&14Ll#TX7mvzd$|n5<Hn?DLqM%b47&nLX>6y&9Rlo5V8u#j~eK
+z6wQ;YST0q&PO5RUbn`ap)*aGqyJWi#03GbIALNU|4Qm$weJ)lK<QL2!pkM$50SO5O
+z1r77(&p-bj1a`Be3NkP-`g^)KhGg7(d-J;AVF!WMhYlJGzh_nDGx{VoJzknDl=a|m
+zJlkoPY1i*{rew2mT0F1%T0iTxuE>V_yY|iWFJgYNxZmy<GV%ZZFXzKgep&uX{<8by
+zy8XA`vuyZc&EZoUl<-=ZDfzy}hHtz~#rCQhe*@d<oG$!QUd!LMPfg{QuGfhx{hTZ9
+z6jR=~H!aK;G5UVHX=A=X(HG~&7t32>{yHf9=2T3NpMUQ<%fvb#fmiNL5&LyHzBxN?
+zk>}9)`z}+cLO$hZ*Ndes+u4_^XzsZeZlkKP=g!=n^Ck(;%YPeX%dn(n`E23mN-QZY
+z&%QRkt%+AqGFi9n6yt+yQ+qyC?A%wK60Y13{b72TSvjA-wyD1+=fUmI!pygw4h=tg
+zOykG3H-~Qh+v(Ng`(f?RqsgfflMS}+d9L}nqU90G)#pN0YN9M00(CwIZhT`+Y-cOm
+TJ-3|?82AjHu6{1-oD!M<cl<5t
+
+diff --git android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png android/app/src/main/res/mipmap-xxhdpi/ic_launcher.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..d5f1c8d34e7a88e3f88bea192c3a370d44689c3c
+GIT binary patch
+literal 1031
+zc%17D@N?(olHy`uVBq!ia0vp^6F``Q8Ax83A=Cw=BuiW)N`mv#O3D+9QW+dm@{>{(
+zJaZG%Q-e|yQz{EjrrIztFa`(sgt!6~Yi|1%a`XoT0ojZ}lNrNjb9xj&#3c(B0U1_%
+zz603|8tx3*z6?7440=Hf`oRqPAq)m#48}1G))@@;`HY6)jHdC7W(kbuNsLzMjMkZq
+zHrb3eIgGYIl*?$B$7o;3=vd6?Si<O3%II9d=u*Y#TFvNI!{}Da=vK$*UdQOs!06G)
+z=m|tkjGoPmo-K@C&5T|xj6Us*J{^p{K-9_T*UjkH!{`r0y^H~UjDh`(ffE=5Co%?3
+zVhozd7&Hmw{$L=Q!Wc4@F=QHJ=yb-=8H`~-G?OuG7GpRN&1N?X=CF?9bWG-S%jWVb
+z;_|ED4y@%4Y2*%T;SO)-j_l-)>f(;-;fd~1S#VQj;Z4;=cT|_$Q(gK%ZTUmB6_3?c
+zK2clwRBhEWwbelMTpfg707J<V97?l~PA~-qD}PClUoeA!fI~vVd=S`w{`~oM6EDAF
+zU|`bsba4!+xb^lzdT?-{Nb5rlE{-q}SEtPZJW^AHoLX934jk~c-q>J!BSYxN|M?z<
+zlUj=3-!+c;X2<vX@4mEok#_P<Y}X1s)-uagJZNMmiuh-I{-{`y&Aiu7eyUbHu&m~n
+zJ@Q1c`-Y8+;No_bq^|-lXXL^KcOQ3Ec~B_QSs~-%Bo{q##&NeLpJR3$dvvjD%e>V`
+znZ^3uQXXpxxi0@YN8n~v#-hvBvt0P(x=wKWH=nrpSnt!ZVD+MpJ39A#`XjuvYL4r@
+z%70xPa_SSO&+F=VvQfP9wPt6Bob|-(a=B6caVjq_cBa^>yIz`?HgV7Lz?7!taVc%j
+zBT~ASs~H^+7M=M-vpd3O-)R^B!u^+zUlyJ9{QUNS)t-y?uD^WxrCG5{b^NmUrNyTt
+zF1~wy(nV|e6wO6*{m+Z9%{eD=@!Ro)64PMTnF_al2~_M%O5Jpm%Ombfb+V3(f7DAU
+zkEk!%wH6|=tJqI=)$OYnnbWOn-k{=YfA4GmS(ha5lUqxkNvNp*`giSrg^ft3+A4*@
+zi_d2NW?t-{u5|Io>(JHz6cqy%>o=EYl+<LEEoAXZ4RvN(<n-^@+<olIjVEvZJQ5}B
+z?iBLr&Z~FQGJHNqgS^ByuXywF)i?VZ!SJ$;U0U;Q+a^90S-j%SPV+>~={H<j|J+sg
+zbnWoI@-Ihq@f6QRVT;=RuPjq&;!x@U5{o{oI6YsfJnsu{!p!~Go&!@AgQu&X%Q~lo
+FCIBHis+j-)
+
+diff --git android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png android/app/src/main/res/mipmap-xxxhdpi/ic_launcher.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..4d6372eebdb28e45604e46eeda8dd24651419bc0
+GIT binary patch
+literal 1443
+zc$}@1{WsKk6vsdJTdFg%tJav9_E4vzrOaqkWF|A724Nly!y+?N9`Y<EGuRAcJfvb&
+zE7a!c9CbqSP?9ENJGEO%+hP?zkloFeFh~ipU+PcTdtRUSy`OvUFQ0qQ=LDDSsz)#;
+zAcXYX-JHE~uUS6pR^b|oUEG5^BZ-T@gdZ0sk%|*SkwZw_p-@xz7;$*0cc?fd`RKz?
+zIzrIT_4IMUn|<!j;((JBc!eM+1-}dCH{atK!^7u4m+&iiWP?Wz_@2kBhS5cMW@pQC
+z4>ET{JK1O_2U&6vg@-8Kh{{J)A7mv!yKwx_?f|qW80{4y8xf*KAbK>IIf9uJSh&M3
+zKd=r2>maZ`2z!LER|K|)!8Qc;g@Ii-*c|~{1kfX4e>Cim0ehTSu#W=<PCPIZz#$PF
+zB;a@q9FxE~8JttV1t%3)KZ0u-xXQsT9o#a&T><WyZ~#XM2eQCJ2_9Krp5uv=3!W#y
+zD;K<Q%>y>hNnoD>4$f)d<^#6?xGLZk08h0%A8(v9z{fcY{Bywn34G3h53WVvTeLhM
+z-(v7B0YNbcN>+xsJWq_m!FCBS>p;v#gxQ5)^dp#k6vm9j9FAg+iI~$d%sB~jkzuT4
+zjFp19rWhV6FpN-<Vv0!d7d9o986{O2C0{m5y=r{C&RBlkIK7dqXeMXgBr99US+~ep
+zt>o<6o3q<YPHH~y#q*bytwHHJe7i)6H=B?2O|4dp$$UCE@x{hYNb3+<W$*6n;3MlF
+z>sibHhG&p1c4pR=AENp<*jyLiOV`)uWme{@R%aAn5f|3>QIg)OSqt@HPpnoqzEFSY
+zihgymWMUptFG-V<bO~1LJ4X-fSbS4gX^=MiGRNfql8AZT@Q7=wY~g%G)8&q@84KFP
+z$*94~;XXC%*LrEe8R5uQ%l0|1$h6*?cMFkH^EqEi_q)!)>Nn@r>^`crtWn5f4ot+B
+zk4yQ#f1uGWF6=hUFVxbAwsWLyOQ#C8Bb4~b?KcQ??TAJE%&38ExP_|H){ta>x9m_&
+z)fmcNJ*BAL)evR>mIauO`I&2b7_H0>s&J@*(Zqa64IFBfS2CYb{Zwn0WEqXZYE$Z>
+zBqMuJZOTcjVRlXkR5tRf%%>AUD%bYz&7ash^o3U4TeFEo?c@L{erkZIoeC$#Pjf7X
+zM#_RT&&qz#bTfFGUPiE{uZ%MEwuO*8tNUu(%==U`z4meP>`X%Jh7m;>wSWFm-bX|K
+zMTe$4%BYTlkumk8Qa?!dE`xSqYH%YS?2pmCA6F_sor-!+KxSXgV+p#apcVw)u3~K^
+zYMO?obK7ee_Vf*!+M({M>iiuI9gmSf$He5%wTi-GamX4gi&?Fvub-IzVEDoHeT&3I
+z3z>ZB%2E(#qPG^A=}e4&8*O`R%X8AhuS7iU`|)7mbV--Uc4M2^b1pC0;7)7PsGE~V
+zdDC{fh{U`*G&43f|HhcJ#;)z&Dqb5J)~Vkc_u}AaRP?^%4YVE;b<tu0p`%(P={^(F
+zn^T*f-&tWl%81N+`^<7vT|je!>ywv%Z7&_@3Ivwp^ZZDMNA0qiuG0S7YvdND-)~FE
+z56k#RC}_Plr)fx$`}G*GtNgWt?ROH!E`54Zp^PW170vSdSM_3?9K(7De=N>;ZP-E!
+z&?%Ci<^*%<M9q<}A9z%AH~*~o7)YMi3uRO&UQahKC<%FwR<u)RTCvff9O-<=1Ohi5
+f`x2I5>#J_arz?Nc_isn|PeRDuh3$OJQKa|}9I$fT
+
+diff --git images/facebook.png images/facebook.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..cb6366c6cac3d0ca13367fe61e6ced5af2431714
+GIT binary patch
+literal 329
+zc%17D@N?(olHy`uVBq!ia0vp^Vj#@H1|*Mc$*~4foCO|{#S9GG!XV7ZFl&wkP>``W
+z$lZxy-8q?;Kn_c~qpu?a!^VE@KZ&eB{yk3@$B+uft5Y8eHW~1=2A^lNa&j+Vnd4x7
+zK~RQKy@A)ptdPY$fq9ps&$}kCt_xm&50-!Di<;!l@sPn~%aX1u4~wimZc<R+xsvBT
+zD}&CHqniy6<!@0s)_E_%%Cv~TUCv#0N>+`u_S|pWvO8K$)}5N5z1>k-DEi{cJ*PuH
+zus!;iwRbj`pP`@9vg7;{*ZuH&<$iTy*TK*^&v}e{d|lUtvBc-;B`-Hmvdh%Z>NWgb
+zH~CVQl}yUb^PjtCOcz(FeX~2?vtD|8sZ{le{`ALepDuq0nX<{^;HP*Idt31+JI1@W
+X?$7<Z^zufaPZ>O2{an^LB{Ts5nMQn?
+
+diff --git images/google-symbol.png images/google-symbol.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..9393628c134bb575ab4003e80e48a7fe13879ef4
+GIT binary patch
+literal 381
+zc$@)!0fPRCP)<h;3K|Lk000e1NJLTq000#L000#T1^@s6sTZY|00009a7bBm000XU
+z000XU0RWnu7ytkO0drDELIAGL9O(c600d`2O+f$vv5yP<VFdsH0TM|>K~#7FtyO^$
+zf-npWo&&IfxB(m3P3Q=Yzy{(3umK~;296*blnr8Xl)F-!QpLaf;|kwzle7Uq03s^l
+zjrb%QoMG&k-<OaI5*Ne=rlDv3mSN@WDiy4+T%V(BNRLifZ?eoSUGVq}Ldc;Vwwzl}
+zTM|1*Q-ct89|%c71lIf-`{*ORvVv*jhYUNxg}Qj}?hsyF(L+HBa9to1(bbrU1FVn8
+z1b@K6Gs<B<CeG<dT&kUO?y@W!0^&h1IT5up9(PwC=L_PZS-O!Am1roRas2E`1~)E%
+z-Hd;=dsh&<`(?na4QP3O;jgSw22Xflye(=eB#poIQ@xe^Z#qBg3P=Ucx#PYW`bY6G
+bRMOlx^WxtA$I6z(00000NkvXXu0mjf5;2z~
+
+diff --git images/logo.png images/logo.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..8899d97ef31da89696509295b1c7024752796933
+GIT binary patch
+literal 5814
+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
+A!vFvP
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-1024x1024@1x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..dc9ada4725e9b0ddb1deab583e5b5102493aa332
+GIT binary patch
+literal 10932
+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
+a&h7g@zCnA6_LsQFmEW&fk!0=hkADHYSl@O4
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@1x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..28c6bf03016f6c994b70f38d1b7346e5831b531f
+GIT binary patch
+literal 564
+zc$@(=0?Yl0P)<h;3K|Lk000e1NJLTq000yK000yS1^@s6jfou%00001b5ch_0Itp)
+z=>Px$?ny*JR5%f>l)FnDQ543{x%ZCiu33$Wg!pQFfT_}?5Q|_VSlIbLC`dpoMXL}9
+zHfd9&47Mo(7D231gb+kjFxZHS4-m~7WurTH&doVX2KI5sU4v(sJ1@T9eCIKPjsqSr
+z)C01LsCxk=72-vXmX}CQD#BD;Cthymh&~=f$Q8nn0J<}ZrusBy4PvRNE}+1ceuj8u
+z0mW5k8fmgeLnTbWHGwfKA3@PdZxhn|PypR&^p?weGftrtCbjF#+zk_5BJh7;0`#Wr
+zgDpM_;Ax{jO##IrT`Oz;MvfwGfV$zD#c2xckpcXC6oou4ML~ezCc2EtnsQTB4tWNg
+z?4bkf;hG7IMfhgNI(FV5Gs4|*GyMTIY0$B=_*mso9<WQhydS~rpwVfTyjm}~vs+Nj
+zL2;<v%s@b+9jXc@S}#x@@VwF4twVwRxFCih^tWg?H)v?24ZSeYC3aaOsM8yWc7GEz
+z7zKYq3)^d7srCATzmw!h1d8POV>Ityq$m^S>15>-?0(zQ<8Qy<_TjHE33(?_M8oaM
+zyc;NxzRVK@DL6RJnX%U^xW0Gpg(lXp(!uK1v0YgHjs^ZXSQ|m#lV<y2`lV{mrphLz
+zZs5NcIN~Wp-YgL)o*yksN!%A$BK4ovtf60)eD^OF((VmRH^fQ+0000<MNUMnLSTXr
+Cg!*^@
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@2x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2ccbfd967d9697cd4b83225558af2911e9571c9b
+GIT binary patch
+literal 1283
+zc$@(P1^oJnP)<h;3K|Lk000e1NJLTq001Ze001Zm1^@s6jQ+T7000EaNkl<Zc$~$U
+zO>7ip7{`C_J2Tx<S}3NqpxB^%g)f1Fg2os<-~kDV#FGRs+&p_AidZnjqZ&0H2nR1*
+zj0q8l5fTo51w)j?(&7h*nm|&p(vR)ByR$QY4>Pmfw%h$|%acrYHt)Re^PB%O&&=~a
+zhS(%I#+V>J-vjIib^<+s%ludY7y^C(P8nmqn9fp!i+?vr`bziDE=bx`%2W#Xyrj|i
+z!XQ4v1%L`m{7KT7q+LZNB^h8Ha2e=`Wp65^0;J00)_^G=au=8Yo;1b`CV&@#=jIBo
+zjN^JNVfYSs)+kDdGe7`1&8!?MQYKS?D<dJ!G*SVsfpkGU(q>uHZf3iogk_%#9E|5S
+zWeHrmAo>P;ejX7mwq#*}W25m^ZI+{(Z8fI?4jM_fffY0nok=+88^|*_DwcW>mR#e+
+z<Ez>X$F_KMdb6sRz!~7KkyN0G(3XQ+;z3X%PZ4gh;n-%62U<*VUKNv(D&<?Pa8X$2
+z7!Cm2JRI`|2MxYb7DBni>Q->Na@Xb&u5Q3`3DGf+a8O5x7c#7+R+EAYl@R5us)CIw
+z7sT@_y~Ao@uL#&^LIh&QceqiT^+lb0YbFZt_SHOtWA%mgPEKVNvVgCsXy{5+zl*X8
+zCJe)Q@y>wH^>l4;h1l^Y*9%-23TSmE>q5nI@?mt%n;Sj4Qq`Z+ib)a*a^cJc%E9^J
+zB;4s+K@rARbcBLT5P=@r;IVnBMKvT*)ew*R;&8vu%?Z&S>s?8?)3*YawM0P4!q$Kv
+zMmKh3lgE~&w&v%wVzH3Oe=jeNT=n@Y6J6TdHWTjXfX~-=1A1Bw`EW8rn}MqeI34nh
+zexFeA?&C3B2(E?0{drE@DA2pu(A#ElY&6el60Rn|Qpn-FkfQ8M93AfWIr)drgDFEU
+zghdWK)^71EWCP(@(=c4kfH1Y(4iugD4fve6;nSUpLT%!)MUHs1!zJYy4y||C+SwQ!
+z)KM&$7_tyM`sljP2fz6&Z;jxRn{Wup8IOUx8D4uh&(=<hAE@CMcU{$tA%YXI_aT>O
+zx-7$a;U><*5L^!%<hgO?EU&+RjyvO7JjW1(jTP<<mHfpWO->xRlw)vAbh;sdlR||&
+ze}8_8%)c2Fwy=F&H|LM+p{pZB5DKTx>Y?F1N%BlZkXf!}JeGuMZk~LPi7{cidvUGB
+zAJ4LVeNV%XO>LTrklB#^-;8nb;}6l;1oW&WS=Mz*Az!4cqqQzbOSFq`$Q%PfD7srM
+zpKgP-D_0XPTRX*hAqeq0TDkJ;5HB1%$3Np)99#1<DGLlIe;R_chCpIPcPAH*zr@Cs
+z?fB^|EuMpG4X$HBVo_%sSAM_4?&DuFlF8#(Lxtca1NV%iv%qemMnJ<G_#|w%M>6c{
+zJImlNL(np<oN+CTXIZs=Ip^Qn&FbY#Fn}>L!W|Gr_kxl1GVmF5&^$^YherS7+~q$p
+zt}{a=*RiD2Ikv6o=IM1kgc7zqpaZ;OB)P!1zz*i3{U()Dq#jG)egvK}@uFLa`oyWZ
+zf~=MV)|yJn`M^$N%ul5);JuQvaU1r2wt(}J_Qgyy`qWQI`hEeRX0uC@c1(dQ2}=U$
+tNIIaX+dr)NRWXcxoR{>fqI{SF_dm1Ylv~=3YHI)h002ovPDHLkV1g(pWS;;4
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-20x20@3x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..f091b6b0bca859a3f474b03065bef75ba58a9e4c
+GIT binary patch
+literal 1588
+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
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@1x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..4cde12118dda48d71e01fcb589a74d069c5d7cb5
+GIT binary patch
+literal 1025
+zc$@(N1pfPpP)<h;3K|Lk000e1NJLTq0012T0012b1^@s6R+DEB000BXNkl<Zc$~GD
+zO=w(I6vuz}zV|Yjbed17ZK+8~s#O|MP&clmqDBgWZmLq<SX}r4y4TvKx^iJf5Gq-y
+zOGQEjOCyP3MX4X5l~PNgieUPsktUPGBs1^bzl-}OnIxT=SE~o^V(z=|{La^$dmfUE
+zBm*GnK}km>U6E9hRK9^#O7(mu>ETqrXGsduA8$)?`v2seloOCza43C{NQ$$<lg6i9
+zl}<@|7r;n*02l>gAOH**MCn0Q?+L7dl7qnbRdqZ8LSVp1ItDxhxD?t@5_yHg6A8yI
+zC*%Wgg22K|8E#!~c<Gji=2TnCP5=vx8A($>TNYR~@Y9Kep<iQi*1HiJn2AMS!E&HK
+zVnfa>MPrrB8cABapAFa=`H+UGhkXUZV1GnwR1*lPyZ;*K(i~2gp|@bzp8}og7e*#%
+zEnr|^CWdVV!-4*Y_7rFvlww2Ze+>j*!Z!pQ?2l->4q#nqRu9`ELo6RMS5=br47g_X
+zRw}P9a7RRYQ%2Vsd0Me{_(EggTnuN6j=-?uFS6j^u69elMypu?t>op*wBx<=Wx8?(
+ztpe^(fwM6jJX7M-l*k3kEpWOl_Vk3@(_w4oc}4YF<H6foEqi-Iie=wvW~+c5O@{fz
+z15Zzj&L+qQPza&y;JLn#y}co!t)163;kCwx>4|Rt=<qKwceYzzPl3~A@%(s+$wlbO
+zc~D^BY8jsH33#eIY*@)P+hFCz&o3t2+iBU*?19gIU*g-zge@(Wn_CP4Vk(AbwubEK
+z374wAp49EV)x|L}FJ3uW;>2V^XU?#Yz`8(e?aZ@#li0n*=g^qOcVpd-Wbok=@b#Yw
+zqn8u9a)z>l(1<yk<F_A9G0?W)jg&H7#tqwGWPN2m*&Q-?N5mfsA}|J<Z(-)UuQ+*R
+zjGb?c@Yn1jfi)zqX5f~c$$GU_a(w7qiMP%R9Utb>kEaPYZ6hwubN6i<8QHgsu0oE)
+ziJ(p;Wxm>sf!K+cw>R-(^Y2_bahB+&KI9y^);#0qt}t-$C|Bo71lHi{_+lg#f%RFy
+z0um=e3$K3i6K{U_4K!EX<i!R0Z{NtsYrELo(c*J#)_6Q;B#i<)$v7hkaB2AVeLT(w
+zU;Ip%kGwHqz-)1z`*v*RqZjUHU2}-Rka8<C(s3i{5#T7-ISo1qYYdC!WW~O<hQAkM
+zTAD(la4CD$)8M0iM>?F&rExl^W|G8Z8;`5z-k}OGNZ0#WVb$WCpQu-_YsiqKP?BB#
+vzVHS-CTUF4Ozn5G+mq_~Qqto~ahA+K`|lyv3(-e}00000NkvXXu0mjfd`9t{
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@2x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..d0ef06e7edb86cdfe0d15b4b0d98334a86163658
+GIT binary patch
+literal 1716
+zc%0pn`#;kQ7{|XelZftyR5~xW7?MLxS4^|Hw3&P7^y)@A9Fj{Xm1~_CIV^XZ%SLBn
+zA;!r`GqGHg=7>xrB{?psZQs88ZaedDoagm^KF{a*>G|P#o(z&VUPsGN3jhEef;-Mf
+zRh`yS6RFbCkTydAP#Yw9`nsuF<^MeZb0Tms3~);Vi1z@`e88(1I9ULY3ITE<;8O(n
+zl_2m*2u~{F<Xr^i9>TW(;a`mKFF^#9A_D1Z2SU_H*=l|zNJ<fsQj82NMF!H5L3H(i
+zQj~8oDu|8>R>461RDp`F)g|ZX-ReNcRG_cbp_5zDX;1YV#0DxF#fFVyV=nkZlf;xO
+zG2=?ixe|-!Zx$+Tk?iG)_qIqZTO?KyY^#_$E0t-LV4`a=F?AS~;VCg4N(^6V9mlce
+zDQ%)3*u-&cJC%o?NL_i-6CG0g8X%r8#q&Y;4yijIB=DsKK1k$)9-W|PC+MZ(8AuYq
+z<Sx*s3#4>|zFkt^ZqQGK0Q47t0Rk{k00ut?W1r2(mGR=Mdg7~k<A=Y;4@1}4{WpZr
+zO(B#hgs88fOci6$T@jr7Mn-!hD-_8}MG)hytn96<T*Z{EVoJuGma(2qu%>0~85yT{
+ziqkj6>3>(>KV3fyH+_JcKf>*w;P!d=={(Gvhxwo3&d>6J$%Vls`Ovcb)rx%Lt3vcu
+zA%$QNR)TUR1j`{<A%o>Ixk9E;!g2+yP|D>Bxk80fu@*|j+LG6#@nzHw)j@m4`gl_S
+zgc?#ErJ<$0K}UC^p25ET_6M;}N1SnZ0@2$iIW;5ekDUC%5_$#m&&H;|9=AQ=b#w`O
+zdi(kZhh7Rt$7cUsUi~JPg5M$4XvOe9x*q@lNhIK$echikUf&529yeOIVigw^9o3z&
+z)yP8ES3PXUc620lrlY<4HrtOJZKaFDSYB$3v+c^bZk4_RO|;vRn3PsnRlQ)NlPEjA
+zTeM)#`+H$?qO&Hx630&1TAtite86Da^hC3n3la4QS9zTKW?kCAh9%Ovt>gsbkeI_&
+zqx+V2vdHhR)<4o;?_d?Heij!xV))6&U}#%?ljlXv6dzOd8-4G@mgLM=#J4S7o35o2
+z&*fq+q9+=(R!&!X8#j8t_~O(ePPKJ$7}?@5xB^`fIM^8k*nSwd>ArNBY@fjl{VhL_
+z#zbH7EME~+)}cQm4A&P&G<RJ%To!I_w~Cji<kIFf_RMSC)ZNuEbi9i8;948*{y`7G
+z#8g;qlD~S$B<LP-@<joWalw&5tD%=%uslg)3*UxPOj7!S&2ycIH+B8mNK*5Z6CreU
+zt^CKW>cpJ7aT}xjEusB=wZXG(uA$(Kxx|8^>l-8Iu%g<W$@b-WGOGzLYCDD{WF<~<
+zqA;XO{><K>`_&A)3~VW!bM&lknTg@zY}9GP?o0#Ej397k<kxd<r+mIr9^}O;t~59V
+zhkrB+JTQ31>60ZRTm50_h5Y4n{=4lMRUUI`J)JDqDC_-Zk%I_6t-Alq+_bhNRa7VB
+zytfWx<Q<FC<Kgy>QD#d_`ue4MHA2pj8#6XRwAzmxY6iO6Ch`Lo?CotofRM={DyWm1
+zHOalq*X}9wir&w<{it!GAbW?s7z^ikVeLifg1Gaowg!%22`1gN+ST}LFtjuCPIkHe
+zF1N<K_2)|;M=Ue<oHxG}&L!sx%Qj;ckL|o@^Awx3nwPH0DQK-~OCKd%Ms?5O2ZYo;
+z!9OOCZn})RyeHOiQiFMV#PL@Doy^J@W~gTIp_ow*i-ssy$k;aFE9IN^M8mMliQ9LL
+z6#80=CFTBXN7tywEA;vZQIlWKea5Nyq~v3!*60y8>ccD?OZxg<YkdndYxh$6LJD!_
+z=+ExE{GDAz&si->;Yh-HHmP7a2=Z^cYPu0M1qF!TmtGkkW_R#P#^CD})Wwy88Uw61
+zSafwec~#Hhvl;Ifsi4R53k#{JNnCj9ytJSp4Hq6yIehCmJ!!n*j?2LBX%f}90t7d2
+K+(VZ$ss91nr1nz)
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-29x29@3x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..dcdc2306c28505ebc0b6c3a359c4d252bf626b9f
+GIT binary patch
+literal 1920
+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
+GLSTY{`iRf~
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@1x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..2ccbfd967d9697cd4b83225558af2911e9571c9b
+GIT binary patch
+literal 1283
+zc$@(P1^oJnP)<h;3K|Lk000e1NJLTq001Ze001Zm1^@s6jQ+T7000EaNkl<Zc$~$U
+zO>7ip7{`C_J2Tx<S}3NqpxB^%g)f1Fg2os<-~kDV#FGRs+&p_AidZnjqZ&0H2nR1*
+zj0q8l5fTo51w)j?(&7h*nm|&p(vR)ByR$QY4>Pmfw%h$|%acrYHt)Re^PB%O&&=~a
+zhS(%I#+V>J-vjIib^<+s%ludY7y^C(P8nmqn9fp!i+?vr`bziDE=bx`%2W#Xyrj|i
+z!XQ4v1%L`m{7KT7q+LZNB^h8Ha2e=`Wp65^0;J00)_^G=au=8Yo;1b`CV&@#=jIBo
+zjN^JNVfYSs)+kDdGe7`1&8!?MQYKS?D<dJ!G*SVsfpkGU(q>uHZf3iogk_%#9E|5S
+zWeHrmAo>P;ejX7mwq#*}W25m^ZI+{(Z8fI?4jM_fffY0nok=+88^|*_DwcW>mR#e+
+z<Ez>X$F_KMdb6sRz!~7KkyN0G(3XQ+;z3X%PZ4gh;n-%62U<*VUKNv(D&<?Pa8X$2
+z7!Cm2JRI`|2MxYb7DBni>Q->Na@Xb&u5Q3`3DGf+a8O5x7c#7+R+EAYl@R5us)CIw
+z7sT@_y~Ao@uL#&^LIh&QceqiT^+lb0YbFZt_SHOtWA%mgPEKVNvVgCsXy{5+zl*X8
+zCJe)Q@y>wH^>l4;h1l^Y*9%-23TSmE>q5nI@?mt%n;Sj4Qq`Z+ib)a*a^cJc%E9^J
+zB;4s+K@rARbcBLT5P=@r;IVnBMKvT*)ew*R;&8vu%?Z&S>s?8?)3*YawM0P4!q$Kv
+zMmKh3lgE~&w&v%wVzH3Oe=jeNT=n@Y6J6TdHWTjXfX~-=1A1Bw`EW8rn}MqeI34nh
+zexFeA?&C3B2(E?0{drE@DA2pu(A#ElY&6el60Rn|Qpn-FkfQ8M93AfWIr)drgDFEU
+zghdWK)^71EWCP(@(=c4kfH1Y(4iugD4fve6;nSUpLT%!)MUHs1!zJYy4y||C+SwQ!
+z)KM&$7_tyM`sljP2fz6&Z;jxRn{Wup8IOUx8D4uh&(=<hAE@CMcU{$tA%YXI_aT>O
+zx-7$a;U><*5L^!%<hgO?EU&+RjyvO7JjW1(jTP<<mHfpWO->xRlw)vAbh;sdlR||&
+ze}8_8%)c2Fwy=F&H|LM+p{pZB5DKTx>Y?F1N%BlZkXf!}JeGuMZk~LPi7{cidvUGB
+zAJ4LVeNV%XO>LTrklB#^-;8nb;}6l;1oW&WS=Mz*Az!4cqqQzbOSFq`$Q%PfD7srM
+zpKgP-D_0XPTRX*hAqeq0TDkJ;5HB1%$3Np)99#1<DGLlIe;R_chCpIPcPAH*zr@Cs
+z?fB^|EuMpG4X$HBVo_%sSAM_4?&DuFlF8#(Lxtca1NV%iv%qemMnJ<G_#|w%M>6c{
+zJImlNL(np<oN+CTXIZs=Ip^Qn&FbY#Fn}>L!W|Gr_kxl1GVmF5&^$^YherS7+~q$p
+zt}{a=*RiD2Ikv6o=IM1kgc7zqpaZ;OB)P!1zz*i3{U()Dq#jG)egvK}@uFLa`oyWZ
+zf~=MV)|yJn`M^$N%ul5);JuQvaU1r2wt(}J_Qgyy`qWQI`hEeRX0uC@c1(dQ2}=U$
+tNIIaX+dr)NRWXcxoR{>fqI{SF_dm1Ylv~=3YHI)h002ovPDHLkV1g(pWS;;4
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@2x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..c8f9ed8f5cee1c98386d13b17e89f719e83555b2
+GIT binary patch
+literal 1895
+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
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-40x40@3x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..a6d6b8609df07bf62e5100a53a01510388bd2b22
+GIT binary patch
+literal 2665
+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
+XsPq=LnkwKG00000NkvXXu0mjfhAk5^
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@2x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..a6d6b8609df07bf62e5100a53a01510388bd2b22
+GIT binary patch
+literal 2665
+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
+XsPq=LnkwKG00000NkvXXu0mjfhAk5^
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-60x60@3x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..75b2d164a5a98e212cca15ea7bf2ab5de5108680
+GIT binary patch
+literal 3831
+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
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@1x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..c4df70d39da7941ef3f6dcb7f06a192d8dcb308d
+GIT binary patch
+literal 1888
+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
+aR{jt9+;fr}hV%pg0000<MNUMnLSTYU=Zg*i
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-76x76@2x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..6a84f41e14e27f4b11f16f9ee39279ac98f8d5ac
+GIT binary patch
+literal 3294
+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
+
+diff --git ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png ios/Runner/Assets.xcassets/AppIcon.appiconset/Icon-App-83.5x83.5@2x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..d0e1f58536026aebc4f1f70e481f6993c9ff088d
+GIT binary patch
+literal 3612
+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
+
+diff --git ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..9da19eacad3b03bb08bbddbbf4ac48dd78b3d838
+GIT binary patch
+literal 68
+zc%17D@N?(olHy`uVBq!ia0vp^j3CUx0wlM}@Gt=>Zci7-kcv6Uzs@r-FtIZ-&5|)J
+Q1PU{Fy85}Sb4q9e0B4a5jsO4v
+
+diff --git ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@2x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..9da19eacad3b03bb08bbddbbf4ac48dd78b3d838
+GIT binary patch
+literal 68
+zc%17D@N?(olHy`uVBq!ia0vp^j3CUx0wlM}@Gt=>Zci7-kcv6Uzs@r-FtIZ-&5|)J
+Q1PU{Fy85}Sb4q9e0B4a5jsO4v
+
+diff --git ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png ios/Runner/Assets.xcassets/LaunchImage.imageset/LaunchImage@3x.png
+new file mode 100644
+index 0000000000000000000000000000000000000000..9da19eacad3b03bb08bbddbbf4ac48dd78b3d838
+GIT binary patch
+literal 68
+zc%17D@N?(olHy`uVBq!ia0vp^j3CUx0wlM}@Gt=>Zci7-kcv6Uzs@r-FtIZ-&5|)J
+Q1PU{Fy85}Sb4q9e0B4a5jsO4v
+
