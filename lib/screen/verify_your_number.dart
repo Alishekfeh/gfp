@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:sahab_app/helper/style.dart';
+import 'package:pin_code_text_field/pin_code_text_field.dart';
+import 'package:sahab_app/widgets/bottom_sign.dart';
+import 'package:sahab_app/widgets/row_sign.dart';
+
 class VerifyYourNumber extends StatefulWidget {
   @override
   _VerifyYourNumberState createState() => _VerifyYourNumberState();
@@ -37,19 +41,24 @@ class _VerifyYourNumberState extends State<VerifyYourNumber> {
                     "Please enter the code sent to your number.",style: KPleaseEnter,
                   ),
                   sizedBox22,
-                  // PinFieldAutoFill(
-                  //     decoration: UnderlineDecoration(
-                  //         textStyle: TextStyle(fontSize: 20, color: Colors.black),
-                  //         colorBuilder: FixedColorBuilder(Colors.black.withOpacity(0.3))
-                  //
-                  //     ),codeLength: 4,
-                  //   controller: null,
-                  //   onCodeChanged: null,
-                  //   autofocus: null,
-                  //   onCodeSubmitted: null,
-                  //
-                  //
-                  // ),
+                  PinCodeTextField(
+                    maxLength: 4,
+                    hasUnderline: true,
+                   pinBoxOuterPadding: EdgeInsets.all(8),
+
+
+                    onTextChanged: (value){
+                      print(value);
+                    },
+
+                  ),
+                  sizedBox22,
+                  sizedBox22,
+                  BottomSign(title: "Verify & Continue",),
+                  sizedBox22,
+                  RowSign(title1: "Didn’t receive a code? ",title2: "Resend Code",),
+                  sizedBox8,
+                  RowSign(title1: "Wrong Mobile number?  ",title2: "Edit Mobile Number",),
 
 
 

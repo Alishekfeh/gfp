@@ -19,7 +19,7 @@ dependencies:
   pinput:
   fluttertoast:
   image_picker:
-  sms_autofill:
+  pin_code_text_field:
 
 
 dev_dependencies:
