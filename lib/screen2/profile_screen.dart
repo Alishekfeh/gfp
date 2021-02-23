@@ -2,6 +2,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:sahab_app/helper/style.dart';
+import 'package:sahab_app/widgets/body_profile.dart';
+import 'package:sahab_app/widgets/button_profile.dart';
+
+import 'camera_page.dart';
 class ProfileScreen extends StatefulWidget {
   @override
   _ProfileScreenState createState() => _ProfileScreenState();
@@ -10,44 +14,127 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(left: 30, top: 37, right: 30,bottom: 100),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(top: 45,right: 140,bottom: 10),
-              child: Text("Welcome Ali",style: KSignIntoYourAccount,)),
-        Expanded (
-           child: ListView(
+    return
+        // padding: const EdgeInsets.only(left: 30, top: 37, right: 30,bottom: 100),
+    ListView(
+      physics: BouncingScrollPhysics(),
+      children: <Widget>[
+        Container(
+          child: Stack(
+            children: <Widget>[
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  Container(
+                    height: 300,
+                    child: Stack(
+                      children: <Widget>[
+                        Container(
+                          color: Color(0xff008831),
 
-
-             shrinkWrap: true ,
-
-             children: <Widget>[
-               MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
-                 ,title: "Under Review",color: Color(0xff3FB569),),
-               MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
-                 ,title: "Rejected",color: Color(0xffD23939),),
-
-               MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
-                 ,title: "Pending",color: Color(0xff07303E),),
-               MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
-                 ,title: "Pending",color: Color(0xff07303E),),
-             ],
-           ),
-         ),
-
-
-
-
-        ],
-      ),
+                        ),
+                        // Container(
+                        //   padding: EdgeInsets.all(16),
+                        //   child: Icon(
+                        //     Icons.arrow_back,
+                        //     color: Colors.white,
+                        //   ),
+                        // ),
+                        Container(
+                          alignment: Alignment.center,
+                          padding: EdgeInsets.only(bottom: 25),
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              ClipRRect(
+                                borderRadius: BorderRadius.circular(30),
+                                child: Image.asset(
+                                  "images/sahhhab.jpg",
+                                  width: 100,
+                                  height: 100,
+                                  fit: BoxFit.cover,
+                                ),
+                              ),
+                              SizedBox(
+                                height: 16,
+                              ),
+                              Text(
+                                "@Ali",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 25,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Text(
+                                "ali@gmail.com",
+                                style: TextStyle(
+                                    color: Colors.white70, fontSize: 18),
+                              )
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    child: BodyContent(),
+                  )
+                ],
+              ),
+              Positioned(
+                  top: 276, left: 50, right: 50, child: GestureDetector(
+                  onTap: (){
+                    Navigator.of(context).pushReplacement(MaterialPageRoute(
+                        builder: (BuildContext context) => CameraPage()));
+                  },
+                  child: BtnBackCustom())),
+            ],
+          ),
+        ),
+      ],
     );
-  }
-}
 
+    }
+}
+//Padding(
+//       padding: const EdgeInsets.only(left: 30, top: 37, right: 30,bottom: 100),
+//       child: Column(
+//         mainAxisAlignment: MainAxisAlignment.start,
+//         crossAxisAlignment: CrossAxisAlignment.start,
+//         children: <Widget>[
+//           Padding(
+//               padding: EdgeInsets.only(top: 45,right: 140,bottom: 10),
+//               child: Text("Welcome Ali",style: KSignIntoYourAccount,)),
+//         Expanded (
+//            child: ListView(
+//
+//
+//              shrinkWrap: true ,
+//
+//              children: <Widget>[
+//                MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
+//                  ,title: "Under Review",color: Color(0xff3FB569),),
+//                MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
+//                  ,title: "Rejected",color: Color(0xffD23939),),
+//
+//                MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
+//                  ,title: "Pending",color: Color(0xff07303E),),
+//                MaterialCard(text:"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when"
+//                  ,title: "Pending",color: Color(0xff07303E),),
+//              ],
+//            ),
+//          ),
+//
+//
+//
+//
+//         ],
+//       ),
+//     );
 class MaterialCard extends StatelessWidget {
   final Color color;
   final String title,text;

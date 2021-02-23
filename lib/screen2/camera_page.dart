@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'dart:io';
 
 import 'package:image_picker/image_picker.dart';
+import 'package:sahab_app/screen2/report_page.dart';
+
 
 class CameraPage extends StatefulWidget {
   @override
@@ -12,8 +14,11 @@ class _CameraPageState extends State<CameraPage> {
   File imageFile;
     _openCamera()async{
     final picture=await ImagePicker().getImage(source: ImageSource.camera);
+    Navigator.of(context).pushReplacement(MaterialPageRoute(
+        builder: (BuildContext context) => ReportPage()));
     this.setState(() {
       imageFile=File(picture.path) ;
+
     });
 
   }

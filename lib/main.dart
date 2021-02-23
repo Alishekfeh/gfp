@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:sahab_app/screen/sign_in.dart';
-import 'package:sahab_app/screen/sign_up.dart';
-import 'package:sahab_app/screen/verify_your_number.dart';
 
-import 'main_screen.dart';
 
 void main() {
   runApp(MyApp());
